@@ -22,32 +22,32 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_f63a601287de92960bbd74d8ff486f8965e6456aac671d386034b2efa3ac7933 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_f63a601287de92960bbd74d8ff486f8965e6456aac671d386034b2efa3ac7933->enter($__internal_f63a601287de92960bbd74d8ff486f8965e6456aac671d386034b2efa3ac7933_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "user/dashboard.html.twig"));
+        $__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc->enter($__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "user/dashboard.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_f63a601287de92960bbd74d8ff486f8965e6456aac671d386034b2efa3ac7933->leave($__internal_f63a601287de92960bbd74d8ff486f8965e6456aac671d386034b2efa3ac7933_prof);
+        $__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc->leave($__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc_prof);
 
     }
 
     // line 3
     public function block_body_id($context, array $blocks = array())
     {
-        $__internal_a602ccee4e494325aa8ba2ee33e642b0fce0eb498a200e82a8a6bec7516cd81a = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_a602ccee4e494325aa8ba2ee33e642b0fce0eb498a200e82a8a6bec7516cd81a->enter($__internal_a602ccee4e494325aa8ba2ee33e642b0fce0eb498a200e82a8a6bec7516cd81a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
+        $__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847->enter($__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
 
         echo "dashboard";
         
-        $__internal_a602ccee4e494325aa8ba2ee33e642b0fce0eb498a200e82a8a6bec7516cd81a->leave($__internal_a602ccee4e494325aa8ba2ee33e642b0fce0eb498a200e82a8a6bec7516cd81a_prof);
+        $__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847->leave($__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847_prof);
 
     }
 
     // line 5
     public function block_main($context, array $blocks = array())
     {
-        $__internal_079b36e2a3496911bd8210ebbe7c2db7f29b36ece59122ddaf00dacd35a8abb7 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_079b36e2a3496911bd8210ebbe7c2db7f29b36ece59122ddaf00dacd35a8abb7->enter($__internal_079b36e2a3496911bd8210ebbe7c2db7f29b36ece59122ddaf00dacd35a8abb7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e->enter($__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 6
         echo "    <div class=\"col-sm-6\">
@@ -56,7 +56,7 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["player"]) ? $context["player"] : $this->getContext($context, "player")), "username", array()), "html", null, true);
         echo "
         <br>
-        Full name:";
+        Full name: ";
         // line 9
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["player"]) ? $context["player"] : $this->getContext($context, "player")), "fullName", array()), "html", null, true);
         echo "
@@ -98,18 +98,21 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
                 ";
             }
             // line 22
-            echo "
-            ";
+            echo "            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['kingdom'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 24
+        // line 23
         echo "        </div>
+        <div class=\"btn btn-default\"><a href=\"";
+        // line 24
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("buildings_list");
+        echo "\">Buildings</a></div>
     </div>
 ";
         
-        $__internal_079b36e2a3496911bd8210ebbe7c2db7f29b36ece59122ddaf00dacd35a8abb7->leave($__internal_079b36e2a3496911bd8210ebbe7c2db7f29b36ece59122ddaf00dacd35a8abb7_prof);
+        $__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e->leave($__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e_prof);
 
     }
 
@@ -125,7 +128,7 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
 
     public function getDebugInfo()
     {
-        return array (  108 => 24,  101 => 22,  89 => 20,  79 => 18,  77 => 17,  74 => 16,  70 => 15,  61 => 9,  56 => 7,  53 => 6,  47 => 5,  35 => 3,  11 => 1,);
+        return array (  110 => 24,  107 => 23,  101 => 22,  89 => 20,  79 => 18,  77 => 17,  74 => 16,  70 => 15,  61 => 9,  56 => 7,  53 => 6,  47 => 5,  35 => 3,  11 => 1,);
     }
 
     public function getSource()
@@ -138,7 +141,7 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
     <div class=\"col-sm-6\">
         Username: {{ player.username }}
         <br>
-        Full name:{{ player.fullName }}
+        Full name: {{ player.fullName }}
         <br>
         <br>
         <br>
@@ -151,9 +154,9 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
                 {% else %}
                     <a class=\"list-group-item\" href=\"{{ path(\"change_Kingdom\", {id: kingdom.id }) }}\">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
                 {% endif %}
-
             {% endfor %}
         </div>
+        <div class=\"btn btn-default\"><a href=\"{{ path(\"buildings_list\") }}\">Buildings</a></div>
     </div>
 {% endblock %}
 ";

@@ -2,8 +2,10 @@
 
 namespace KingdomGameBundle\Controller;
 
+use KingdomGameBundle\Entity\Building;
 use KingdomGameBundle\Entity\GameResource;
 use KingdomGameBundle\Entity\Kingdom;
+use KingdomGameBundle\Entity\KingdomBuilding;
 use KingdomGameBundle\Entity\KingdomResource;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -91,6 +93,18 @@ class UserController extends KingdomCurrentController
                     $kingdomResource->setAmount(self::INITIAL_RESOURCES);
                     $kingdomResource->setKingdom($kingdom);
                     $em->persist($kingdomResource);
+                    $em->flush();
+                }
+
+//                TODO: make function
+                $buildingRepository = $this->getDoctrine()->getRepository(Building::class);
+                $buildingTypes = $buildingRepository->findAll();
+                foreach ($buildingTypes as $buildingType){
+                    $kingdomBuilding = new KingdomBuilding();
+                    $kingdomBuilding->setKingdom($kingdom);
+                    $kingdomBuilding->setBuilding($buildingType);
+                    $kingdomBuilding->setLevel(0);
+                    $em->persist($kingdomBuilding);
                     $em->flush();
                 }
 

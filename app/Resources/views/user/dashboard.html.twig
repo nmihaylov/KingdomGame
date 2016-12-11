@@ -6,7 +6,7 @@
     <div class="col-sm-6">
         Username: {{ player.username }}
         <br>
-        Full name:{{ player.fullName }}
+        Full name: {{ player.fullName }}
         <br>
         <br>
         <br>
@@ -19,8 +19,8 @@
                 {% else %}
                     <a class="list-group-item" href="{{ path("change_Kingdom", {id: kingdom.id }) }}">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
                 {% endif %}
-
             {% endfor %}
         </div>
+        <div class="btn btn-default"><a href="{{ path("buildings_list") }}">Buildings</a></div>
     </div>
 {% endblock %}

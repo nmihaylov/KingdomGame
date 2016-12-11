@@ -14,7 +14,7 @@ class KingdomCurrentController extends Controller
         /** @var Player $player */
         $player = $this->getUser();
         $kingdomId = $session->get('kingdom_id');
-        if($kingdomId == null){
+        if ($kingdomId == null) {
             $kingdomId = $player->getKingdoms()[0]->getId();
             $session->set('kingdom_id', $kingdomId);
         }
@@ -22,14 +22,13 @@ class KingdomCurrentController extends Controller
         return $kingdomId;
     }
 
-    public function resourcesAction(){
+    public function resourcesAction()
+    {
         $id = $this->getKingdomId();
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($id);
 
-        return $this->render("kingdoms/partials/resources.html.twig",
-            [
-                'kingdom' => $kingdom
-            ]
-            );
+        return $this->render("kingdoms/partials/resources.html.twig", [
+            'kingdom' => $kingdom
+        ]);
     }
 }

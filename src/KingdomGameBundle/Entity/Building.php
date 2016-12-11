@@ -2,6 +2,7 @@
 
 namespace KingdomGameBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +22,24 @@ class Building
      */
     private $id;
 
+    /** @var  BuildingCostResource[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\BuildingCostResource", mappedBy="building")
+     */
+    private $costs;
+
+    /** @var  BuildingCostTime
+     *
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\BuildingCostTime", mappedBy="building")
+     */
+    private $timeCosts;
+
+    /** @var  KingdomBuilding[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\KingdomBuilding", mappedBy="buildings")
+     */
+    private $kingdomBuildings;
+
     /**
      * @var string
      *
@@ -28,6 +47,11 @@ class Building
      */
     private $name;
 
+    public function __construct()
+    {
+        $this->costs = new ArrayCollection();
+        $this->kingdomBuildings = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -62,5 +86,55 @@ class Building
     {
         return $this->name;
     }
+
+    /**
+     * @return BuildingCostResource[]
+     */
+    public function getCosts()
+    {
+        return $this->costs;
+    }
+
+    /**
+     * @param BuildingCostResource[] $costs
+     */
+    public function setCosts(array $costs)
+    {
+        $this->costs = $costs;
+    }
+
+    /**
+     * @return BuildingCostTime
+     */
+    public function getTimeCosts()
+    {
+        return $this->timeCosts;
+    }
+
+    /**
+     * @param BuildingCostTime $timeCosts
+     */
+    public function setTimeCosts(BuildingCostTime $timeCosts)
+    {
+        $this->timeCosts = $timeCosts;
+    }
+
+    /**
+     * @return KingdomBuilding[]
+     */
+    public function getKingdomBuildings()
+    {
+        return $this->kingdomBuildings;
+    }
+
+    /**
+     * @param KingdomBuilding[] $kingdomBuildings
+     */
+    public function setKingdomBuildings(array $kingdomBuildings)
+    {
+        $this->kingdomBuildings = $kingdomBuildings;
+    }
+
+
 }
 

@@ -35,9 +35,17 @@ class GameResource
      */
     private $kingdomResources;
 
+
+    /** @var  BuildingCostResource[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\BuildingCostResource", mappedBy="resource")
+     */
+    private $buildingCosts;
+
     public function __construct()
     {
         $this->kingdomResources = new ArrayCollection();
+        $this->buildingCosts = new ArrayCollection();
     }
 
     /**
@@ -88,6 +96,22 @@ class GameResource
     public function setKingdomResources(array $kingdomResources)
     {
         $this->kingdomResources = $kingdomResources;
+    }
+
+    /**
+     * @return BuildingCostResource[]
+     */
+    public function getBuildingCosts()
+    {
+        return $this->buildingCosts;
+    }
+
+    /**
+     * @param BuildingCostResource[] $buildingCosts
+     */
+    public function setBuildingCosts(array $buildingCosts)
+    {
+        $this->buildingCosts = $buildingCosts;
     }
 
 }

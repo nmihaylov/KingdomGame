@@ -59,9 +59,18 @@ class Kingdom
      */
     private $resources;
 
+
+    /** @var  KingdomBuilding[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\KingdomBuilding", mappedBy="kingdom")
+     */
+    private $buildings;
+
+
     public function __construct()
     {
         $this->resources = new ArrayCollection();
+        $this->buildings = new ArrayCollection();
     }
 
     /**
@@ -176,6 +185,22 @@ class Kingdom
     public function setResources(array $resources)
     {
         $this->resources = $resources;
+    }
+
+    /**
+     * @return KingdomBuilding[]
+     */
+    public function getBuildings()
+    {
+        return $this->buildings;
+    }
+
+    /**
+     * @param KingdomBuilding[] $buildings
+     */
+    public function setBuildings(array $buildings)
+    {
+        $this->buildings = $buildings;
     }
 
 

@@ -100,6 +100,19 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => '_twig_error_test')), array (  '_controller' => 'twig.controller.preview_error:previewErrorPageAction',  '_format' => 'html',  '_locale' => 'en',));
         }
 
+        if (0 === strpos($pathinfo, '/buildings')) {
+            // buildings_list
+            if ($pathinfo === '/buildings') {
+                return array (  '_controller' => 'KingdomGameBundle\\Controller\\BuildingsController::indexAction',  '_route' => 'buildings_list',);
+            }
+
+            // building_evolve
+            if (0 === strpos($pathinfo, '/buildings/evolve') && preg_match('#^/buildings/evolve/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'building_evolve')), array (  '_controller' => 'KingdomGameBundle\\Controller\\BuildingsController::evolve',));
+            }
+
+        }
+
         // game_index
         if (rtrim($pathinfo, '/') === '') {
             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {

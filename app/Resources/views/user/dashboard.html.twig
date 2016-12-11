@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'dashboard' %}
+
+{% block main %}
+    <div class="col-sm-6">
+        Username: {{ player.username }}
+        <br>
+        Full name:{{ player.fullName }}
+        <br>
+        <br>
+        <br>
+        <div class="list-group">
+            <h2>Kingdoms</h2>
+            {% for kingdom in player.kingdoms  %}
+
+                {% if kingdom.id == kingdomId %}
+                    <a class="list-group-item active">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
+                {% else %}
+                    <a class="list-group-item" href="{{ path("change_Kingdom", {id: kingdom.id }) }}">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

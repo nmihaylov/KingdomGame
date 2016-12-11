@@ -100,20 +100,20 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => '_twig_error_test')), array (  '_controller' => 'twig.controller.preview_error:previewErrorPageAction',  '_format' => 'html',  '_locale' => 'en',));
         }
 
-        // blog_index
+        // game_index
         if (rtrim($pathinfo, '/') === '') {
             if (!in_array($this->context->getMethod(), array('GET', 'HEAD'))) {
                 $allow = array_merge($allow, array('GET', 'HEAD'));
-                goto not_blog_index;
+                goto not_game_index;
             }
 
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'blog_index');
+                return $this->redirect($pathinfo.'/', 'game_index');
             }
 
-            return array (  '_controller' => 'KingdomGameBundle\\Controller\\HomeController::indexAction',  '_route' => 'blog_index',);
+            return array (  '_controller' => 'KingdomGameBundle\\Controller\\HomeController::indexAction',  '_route' => 'game_index',);
         }
-        not_blog_index:
+        not_game_index:
 
         if (0 === strpos($pathinfo, '/log')) {
             // security_login
@@ -133,9 +133,14 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'KingdomGameBundle\\Controller\\UserController::registerAction',  '_route' => 'user_register',);
         }
 
-        // user_profile
-        if ($pathinfo === '/profile') {
-            return array (  '_controller' => 'KingdomGameBundle\\Controller\\UserController::profileAction',  '_route' => 'user_profile',);
+        // dashboard
+        if ($pathinfo === '/dashboard') {
+            return array (  '_controller' => 'KingdomGameBundle\\Controller\\UserController::dashboardAction',  '_route' => 'dashboard',);
+        }
+
+        // change_Kingdom
+        if (0 === strpos($pathinfo, '/player/changeKingdom') && preg_match('#^/player/changeKingdom/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'change_Kingdom')), array (  '_controller' => 'KingdomGameBundle\\Controller\\UserController::changeKingdom',));
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();

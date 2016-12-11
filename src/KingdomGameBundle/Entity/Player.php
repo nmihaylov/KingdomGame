@@ -2,6 +2,7 @@
 
 namespace KingdomGameBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -43,6 +44,18 @@ class Player implements UserInterface
      */
     private $password;
 
+    /**
+     * @var Kingdom[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\Kingdom", mappedBy="player")
+     */
+    private $kingdoms;
+
+
+    public function __construct()
+    {
+        $this->kingdoms = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -179,5 +192,22 @@ class Player implements UserInterface
     {
         return $this->fullName;
     }
+
+    /**
+     * @return Kingdom[]
+     */
+    public function getKingdoms()
+    {
+        return $this->kingdoms;
+    }
+
+    /**
+     * @param Kingdom[] $kingdoms
+     */
+    public function setKingdoms(array $kingdoms)
+    {
+        $this->kingdoms = $kingdoms;
+    }
+
 }
 

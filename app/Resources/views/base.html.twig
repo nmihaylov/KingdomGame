@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{% block title %}SoftUni Blog{% endblock %}</title>
+    <title>{% block title %}Kingdom Game{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     {% endblock %}
@@ -22,7 +22,7 @@
         <div class="navbar navbar-default navbar-static-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a href="{{ path('blog_index') }}" class="navbar-brand">SOFTUNI BLOG</a>
+                    <a href="{{ path('game_index') }}" class="navbar-brand">Kingdoms</a>
 
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                         <span class="icon-bar"></span>
@@ -31,11 +31,18 @@
                     </button>
                 </div>
                 <div class="navbar-collapse collapse">
+                    {%  if app.user  %}
+                        <ul class="nav navbar-nav navbar-left">
+                            {{ render(controller(
+                            'KingdomGameBundle:KingdomCurrent:resources'
+                            )) }}
+                        </ul>
+                    {% endif %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
                             <li>
-                                <a href="{{ path('user_profile') }}">
-                                    My Profile
+                                <a href="{{ path('dashboard') }}">
+                                    My Dashboard
                                 </a>
                             </li>
                             <li>
@@ -75,7 +82,7 @@
 {% block footer %}
     <footer>
         <div class="container modal-footer">
-            <p>&copy; 2016 - Software University Foundation</p>
+            <p>&copy; 2016 - Nikolay Mihaylov Kingdoms game</p>
         </div>
     </footer>
 {% endblock %}

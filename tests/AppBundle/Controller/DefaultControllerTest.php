@@ -68,8 +68,8 @@ class DefaultControllerTest extends WebTestCase
     public function getPublicUrls()
     {
         yield ['/'];
-        yield ['/en/blog/'];
-        yield ['/en/blog/posts/morbi-tempus-commodo-mattis'];
+        yield ['/en/game/'];
+        yield ['/en/game/posts/morbi-tempus-commodo-mattis'];
         yield ['/en/login'];
     }
 

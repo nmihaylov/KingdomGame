@@ -22,32 +22,32 @@ class __TwigTemplate_2d46970066ae0201859dee6eafeb9892eb70fab8d64f907888dd810e090
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_e17f310f33d95872f0a1ef2deb6f8668a6fff12ecbaaa2a3832dbce5806ee7a6 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_e17f310f33d95872f0a1ef2deb6f8668a6fff12ecbaaa2a3832dbce5806ee7a6->enter($__internal_e17f310f33d95872f0a1ef2deb6f8668a6fff12ecbaaa2a3832dbce5806ee7a6_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "user/register.html.twig"));
+        $__internal_bf48d66cc8e46883f95cc0302ee1f531ab57082690a376bdd3e82efec142908e = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_bf48d66cc8e46883f95cc0302ee1f531ab57082690a376bdd3e82efec142908e->enter($__internal_bf48d66cc8e46883f95cc0302ee1f531ab57082690a376bdd3e82efec142908e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "user/register.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_e17f310f33d95872f0a1ef2deb6f8668a6fff12ecbaaa2a3832dbce5806ee7a6->leave($__internal_e17f310f33d95872f0a1ef2deb6f8668a6fff12ecbaaa2a3832dbce5806ee7a6_prof);
+        $__internal_bf48d66cc8e46883f95cc0302ee1f531ab57082690a376bdd3e82efec142908e->leave($__internal_bf48d66cc8e46883f95cc0302ee1f531ab57082690a376bdd3e82efec142908e_prof);
 
     }
 
     // line 3
     public function block_body_id($context, array $blocks = array())
     {
-        $__internal_251a8038e469e317a776ba91fc1391685ecbaec014c183989ae77cd700d62310 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_251a8038e469e317a776ba91fc1391685ecbaec014c183989ae77cd700d62310->enter($__internal_251a8038e469e317a776ba91fc1391685ecbaec014c183989ae77cd700d62310_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
+        $__internal_f5285297b1d357bdfc3ffa5f7d92b83967e5c6e644921826102f3dca1fd3bad8 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_f5285297b1d357bdfc3ffa5f7d92b83967e5c6e644921826102f3dca1fd3bad8->enter($__internal_f5285297b1d357bdfc3ffa5f7d92b83967e5c6e644921826102f3dca1fd3bad8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
 
         echo "register";
         
-        $__internal_251a8038e469e317a776ba91fc1391685ecbaec014c183989ae77cd700d62310->leave($__internal_251a8038e469e317a776ba91fc1391685ecbaec014c183989ae77cd700d62310_prof);
+        $__internal_f5285297b1d357bdfc3ffa5f7d92b83967e5c6e644921826102f3dca1fd3bad8->leave($__internal_f5285297b1d357bdfc3ffa5f7d92b83967e5c6e644921826102f3dca1fd3bad8_prof);
 
     }
 
     // line 5
     public function block_main($context, array $blocks = array())
     {
-        $__internal_37f6ed889fe4d517d36889c1be4e16e4e3500c0bc3a86190a4d08e0372d09f03 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_37f6ed889fe4d517d36889c1be4e16e4e3500c0bc3a86190a4d08e0372d09f03->enter($__internal_37f6ed889fe4d517d36889c1be4e16e4e3500c0bc3a86190a4d08e0372d09f03_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_12dae824d68b97d4debb201cefde7b3827e946938eab246e284c30f0a6f779e3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_12dae824d68b97d4debb201cefde7b3827e946938eab246e284c30f0a6f779e3->enter($__internal_12dae824d68b97d4debb201cefde7b3827e946938eab246e284c30f0a6f779e3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 6
         echo "    <div class=\"container body-content span=8 offset=2\">
@@ -86,7 +86,7 @@ class __TwigTemplate_2d46970066ae0201859dee6eafeb9892eb70fab8d64f907888dd810e090
                         <div class=\"col-sm-4 col-sm-offset-4\">
                             <a class=\"btn btn-default\" href=\"";
         // line 37
-        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("blog_index");
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("game_index");
         echo "\">Cancel</a>
                             <button type=\"submit\" class=\"btn btn-primary\">Submit</button>
                         </div>
@@ -102,7 +102,7 @@ class __TwigTemplate_2d46970066ae0201859dee6eafeb9892eb70fab8d64f907888dd810e090
     </div>
 ";
         
-        $__internal_37f6ed889fe4d517d36889c1be4e16e4e3500c0bc3a86190a4d08e0372d09f03->leave($__internal_37f6ed889fe4d517d36889c1be4e16e4e3500c0bc3a86190a4d08e0372d09f03_prof);
+        $__internal_12dae824d68b97d4debb201cefde7b3827e946938eab246e284c30f0a6f779e3->leave($__internal_12dae824d68b97d4debb201cefde7b3827e946938eab246e284c30f0a6f779e3_prof);
 
     }
 
@@ -159,7 +159,7 @@ class __TwigTemplate_2d46970066ae0201859dee6eafeb9892eb70fab8d64f907888dd810e090
                     </div>
                     <div class=\"form-group\">
                         <div class=\"col-sm-4 col-sm-offset-4\">
-                            <a class=\"btn btn-default\" href=\"{{ path('blog_index') }}\">Cancel</a>
+                            <a class=\"btn btn-default\" href=\"{{ path('game_index') }}\">Cancel</a>
                             <button type=\"submit\" class=\"btn btn-primary\">Submit</button>
                         </div>
                     </div>

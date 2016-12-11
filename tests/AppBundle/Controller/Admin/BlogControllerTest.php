@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Functional test for the controllers defined inside the BlogController used
- * for managing the blog in the backend.
+ * for managing the game in the backend.
  * See http://symfony.com/doc/current/book/testing.html#functional-tests
  *
  * Whenever you test resources protected by a firewall, consider using the

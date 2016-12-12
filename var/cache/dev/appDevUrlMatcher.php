@@ -100,6 +100,24 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return $this->mergeDefaults(array_replace($matches, array('_route' => '_twig_error_test')), array (  '_controller' => 'twig.controller.preview_error:previewErrorPageAction',  '_format' => 'html',  '_locale' => 'en',));
         }
 
+        if (0 === strpos($pathinfo, '/kingdom')) {
+            // kingdoms
+            if ($pathinfo === '/kingdoms') {
+                return array (  '_controller' => 'KingdomGameBundle\\Controller\\BattleController::indexAction',  '_route' => 'kingdoms',);
+            }
+
+            // view_kingdom
+            if (preg_match('#^/kingdom/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'view_kingdom')), array (  '_controller' => 'KingdomGameBundle\\Controller\\BattleController::showKingdom',));
+            }
+
+        }
+
+        // attack_kingdom
+        if (0 === strpos($pathinfo, '/attackKingdom') && preg_match('#^/attackKingdom/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'attack_kingdom')), array (  '_controller' => 'KingdomGameBundle\\Controller\\BattleController::attack',));
+        }
+
         if (0 === strpos($pathinfo, '/buildings')) {
             // buildings_list
             if ($pathinfo === '/buildings') {

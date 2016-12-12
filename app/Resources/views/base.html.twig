@@ -41,6 +41,11 @@
                     <ul class="nav navbar-nav navbar-right">
                         {% if app.user %}
                             <li>
+                                <a href="{{ path('kingdoms') }}">
+                                    View all Kingdoms
+                                </a>
+                            </li>
+                            <li>
                                 <a href="{{ path('dashboard') }}">
                                     My Dashboard
                                 </a>

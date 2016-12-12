@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body_id 'map' %}
+
+{% block main %}
+
+<h2>Map</h2>
+
+<div class="col-sm-12">
+    <table class="table table-striped table-hover">
+        <thead>
+        <th>Kingdom name</th>
+        <th>Coordinates</th>
+        <th>Action</th>
+        </thead>
+        <tboday>
+            {% for kingdom in kingdoms %}
+            <tr>
+                {% if kingdom in myKingdoms %}
+                <td class="text-danger">Mine - {{ kingdom.name }}</td>
+                {% else %}
+                <td>{{ kingdom.name }}</td>
+                {% endif %}
+                <td>{{ kingdom.x }} : {{ kingdom.y }}</td>
+                <td><a href="{{ path("view_kingdom", {id: kingdom.id}) }}">View</a></td>
+            </tr>
+            {% endfor %}
+        </tboday>
+    </table>
+</div>
+
+{% endblock %}

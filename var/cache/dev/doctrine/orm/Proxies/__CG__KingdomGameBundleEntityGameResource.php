@@ -64,10 +64,10 @@ class GameResource extends \KingdomGameBundle\Entity\GameResource implements \Do
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'kingdomResources', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'buildingCosts'];
+            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'kingdomResources', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'buildingCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'unitCosts'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'kingdomResources', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'buildingCosts'];
+        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'kingdomResources', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'buildingCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\GameResource' . "\0" . 'unitCosts'];
     }
 
     /**

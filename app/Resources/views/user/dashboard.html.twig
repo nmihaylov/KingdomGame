@@ -12,15 +12,19 @@
         <br>
         <div class="list-group">
             <h2>Kingdoms</h2>
-            {% for kingdom in player.kingdoms  %}
+            {% for kingdom in player.kingdoms %}
 
                 {% if kingdom.id == kingdomId %}
                     <a class="list-group-item active">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
+
                 {% else %}
-                    <a class="list-group-item" href="{{ path("change_Kingdom", {id: kingdom.id }) }}">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
+                    <a class="list-group-item" href="{{ path("change_Kingdom", {id: kingdom.id }) }}">{{ kingdom.name }}
+                        [{{ kingdom.x }} : {{ kingdom.y }}]</a>
                 {% endif %}
             {% endfor %}
+
         </div>
-        <div class="btn btn-default"><a href="{{ path("buildings_list") }}">Buildings</a></div>
+        <a class="btn-link btn" href="{{ path("buildings_list") }}">Show all buildings for current Kingdom</a>
+        <a class="btn-link btn" href="{{ path("units") }}">Show all units for current Kingdom</a>
     </div>
 {% endblock %}

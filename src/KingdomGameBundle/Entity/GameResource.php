@@ -42,6 +42,13 @@ class GameResource
      */
     private $buildingCosts;
 
+
+    /** @var  UnitCostResource[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\UnitCostResource", mappedBy="resource")
+     */
+    private $unitCosts;
+
     public function __construct()
     {
         $this->kingdomResources = new ArrayCollection();

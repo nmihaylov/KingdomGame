@@ -37,6 +37,11 @@ class KingdomBuilding
      */
     private $building;
 
+    /** @var  BuildingProgress
+     *
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\BuildingProgress", mappedBy="building")
+     */
+    private $buildingProgress;
 
     /**
      * @var int
@@ -112,7 +117,21 @@ class KingdomBuilding
         $this->building = $building;
     }
 
+    /**
+     * @return BuildingProgress
+     */
+    public function getBuildingProgress()
+    {
+        return $this->buildingProgress;
+    }
 
+    /**
+     * @param BuildingProgress $buildingProgress
+     */
+    public function setBuildingProgress(BuildingProgress $buildingProgress)
+    {
+        $this->buildingProgress = $buildingProgress;
+    }
 
 }
 

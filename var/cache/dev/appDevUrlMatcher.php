@@ -111,6 +111,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return $this->mergeDefaults(array_replace($matches, array('_route' => 'building_evolve')), array (  '_controller' => 'KingdomGameBundle\\Controller\\BuildingsController::evolve',));
             }
 
+            // buildings_costs
+            if ($pathinfo === '/buildings/costs') {
+                return array (  '_controller' => 'KingdomGameBundle\\Controller\\BuildingsController::calculateBuildingsCosts',  '_route' => 'buildings_costs',);
+            }
+
         }
 
         // game_index
@@ -139,6 +144,16 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
                 return array (  '_controller' => 'KingdomGameBundle\\Controller\\SecurityController::logoutAction',  '_route' => 'security_logout',);
             }
 
+        }
+
+        // units
+        if ($pathinfo === '/units') {
+            return array (  '_controller' => 'KingdomGameBundle\\Controller\\UnitsController::indexAction',  '_route' => 'units',);
+        }
+
+        // arm_unit
+        if (0 === strpos($pathinfo, '/armUnit') && preg_match('#^/armUnit/(?P<id>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'arm_unit')), array (  '_controller' => 'KingdomGameBundle\\Controller\\UnitsController::armUnits',));
         }
 
         // user_register

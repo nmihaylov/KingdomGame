@@ -22,32 +22,32 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc->enter($__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "user/dashboard.html.twig"));
+        $__internal_617912aee62f3cb8f8889e831206427ab0c49330749c608a9052ebc6d5ef1cc3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_617912aee62f3cb8f8889e831206427ab0c49330749c608a9052ebc6d5ef1cc3->enter($__internal_617912aee62f3cb8f8889e831206427ab0c49330749c608a9052ebc6d5ef1cc3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "user/dashboard.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc->leave($__internal_3fc8109bacebd232c16666e4eee280cd97188c08cd584103f7664b42f2b7acdc_prof);
+        $__internal_617912aee62f3cb8f8889e831206427ab0c49330749c608a9052ebc6d5ef1cc3->leave($__internal_617912aee62f3cb8f8889e831206427ab0c49330749c608a9052ebc6d5ef1cc3_prof);
 
     }
 
     // line 3
     public function block_body_id($context, array $blocks = array())
     {
-        $__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847->enter($__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
+        $__internal_811957493d453e692433c17668143dabb5cad0da2544cf13a7011c2c7a7a75b3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_811957493d453e692433c17668143dabb5cad0da2544cf13a7011c2c7a7a75b3->enter($__internal_811957493d453e692433c17668143dabb5cad0da2544cf13a7011c2c7a7a75b3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
 
         echo "dashboard";
         
-        $__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847->leave($__internal_fd52301e930b9d3f7ad57e07f695772ae9dc2b3fa0ee244bac1ad6b807662847_prof);
+        $__internal_811957493d453e692433c17668143dabb5cad0da2544cf13a7011c2c7a7a75b3->leave($__internal_811957493d453e692433c17668143dabb5cad0da2544cf13a7011c2c7a7a75b3_prof);
 
     }
 
     // line 5
     public function block_main($context, array $blocks = array())
     {
-        $__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e->enter($__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_faa2485465a2c8d90ce9f04f7862828b11770494a5c4e964bc6ad17385729393 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_faa2485465a2c8d90ce9f04f7862828b11770494a5c4e964bc6ad17385729393->enter($__internal_faa2485465a2c8d90ce9f04f7862828b11770494a5c4e964bc6ad17385729393_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 6
         echo "    <div class=\"col-sm-6\">
@@ -83,36 +83,44 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
                 echo " : ";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["kingdom"], "y", array()), "html", null, true);
                 echo "]</a>
+
                 ";
             } else {
-                // line 20
+                // line 21
                 echo "                    <a class=\"list-group-item\" href=\"";
                 echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("change_Kingdom", array("id" => $this->getAttribute($context["kingdom"], "id", array()))), "html", null, true);
                 echo "\">";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["kingdom"], "name", array()), "html", null, true);
-                echo " [";
+                echo "
+                        [";
+                // line 22
                 echo twig_escape_filter($this->env, $this->getAttribute($context["kingdom"], "x", array()), "html", null, true);
                 echo " : ";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["kingdom"], "y", array()), "html", null, true);
                 echo "]</a>
                 ";
             }
-            // line 22
+            // line 24
             echo "            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['kingdom'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 23
-        echo "        </div>
-        <div class=\"btn btn-default\"><a href=\"";
-        // line 24
+        // line 25
+        echo "
+        </div>
+        <a class=\"btn-link btn\" href=\"";
+        // line 27
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("buildings_list");
-        echo "\">Buildings</a></div>
+        echo "\">Show all buildings for current Kingdom</a>
+        <a class=\"btn-link btn\" href=\"";
+        // line 28
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("units");
+        echo "\">Show all units for current Kingdom</a>
     </div>
 ";
         
-        $__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e->leave($__internal_1bb11192677e1295a19670704b97fa764bd3f02ece7d55658aacbe4d83527b9e_prof);
+        $__internal_faa2485465a2c8d90ce9f04f7862828b11770494a5c4e964bc6ad17385729393->leave($__internal_faa2485465a2c8d90ce9f04f7862828b11770494a5c4e964bc6ad17385729393_prof);
 
     }
 
@@ -128,7 +136,7 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
 
     public function getDebugInfo()
     {
-        return array (  110 => 24,  107 => 23,  101 => 22,  89 => 20,  79 => 18,  77 => 17,  74 => 16,  70 => 15,  61 => 9,  56 => 7,  53 => 6,  47 => 5,  35 => 3,  11 => 1,);
+        return array (  118 => 28,  114 => 27,  110 => 25,  104 => 24,  97 => 22,  90 => 21,  79 => 18,  77 => 17,  74 => 16,  70 => 15,  61 => 9,  56 => 7,  53 => 6,  47 => 5,  35 => 3,  11 => 1,);
     }
 
     public function getSource()
@@ -147,16 +155,20 @@ class __TwigTemplate_ddab520110fbb3db46b2275fc0b6f8d49ed4c9d976bea1e6257567503a9
         <br>
         <div class=\"list-group\">
             <h2>Kingdoms</h2>
-            {% for kingdom in player.kingdoms  %}
+            {% for kingdom in player.kingdoms %}
 
                 {% if kingdom.id == kingdomId %}
                     <a class=\"list-group-item active\">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
+
                 {% else %}
-                    <a class=\"list-group-item\" href=\"{{ path(\"change_Kingdom\", {id: kingdom.id }) }}\">{{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>
+                    <a class=\"list-group-item\" href=\"{{ path(\"change_Kingdom\", {id: kingdom.id }) }}\">{{ kingdom.name }}
+                        [{{ kingdom.x }} : {{ kingdom.y }}]</a>
                 {% endif %}
             {% endfor %}
+
         </div>
-        <div class=\"btn btn-default\"><a href=\"{{ path(\"buildings_list\") }}\">Buildings</a></div>
+        <a class=\"btn-link btn\" href=\"{{ path(\"buildings_list\") }}\">Show all buildings for current Kingdom</a>
+        <a class=\"btn-link btn\" href=\"{{ path(\"units\") }}\">Show all units for current Kingdom</a>
     </div>
 {% endblock %}
 ";

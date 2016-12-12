@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <h3>Units in Kingdom</h3>
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for unit in kingdom.units %}
+            <tr>
+                <td>{{ unit.unit.name }}</td>
+                <td>{{ unit.amount }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h3>Barracks - arm more units</h3>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Costs per 1 unit</th>
+            <th>Add units</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for unit in units %}
+            <tr>
+                <td>{{ unit.name }}</td>
+                <td>
+                    {% for unit_cost in unit.costs %}
+                        <b>{{ unit_cost.resource.name }}</b>: {{ unit_cost.amount }}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="{{ path("arm_unit", {id: unit.id}) }}">Arm 1 unit</a>
+                </td>
+
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

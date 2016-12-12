@@ -1,28 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+    {#<table class="table table-striped table-hover ">#}
+        {#<thead>#}
+        {#<tr>#}
+            {#<th>Name</th>#}
+            {#<th>Level</th>#}
+            {#{% for resource in resources %}#}
+                {#<th>{{ resource.name }} </th>#}
+            {#{% endfor %}#}
+            {#<th>Build next</th>#}
+        {#</tr>#}
+        {#</thead>#}
+        {#<tbody>#}
+        {#{% for building in buildings %}#}
+            {#<tr>#}
+                {#<td>{{ building.building.name }}</td>#}
+                {#<td>{{ building.level }}</td>#}
+                {#{% for cost in building.building.costs %}#}
+                    {#<td>{{ cost.amount * (1.5 * (building.level + 1)) }}</td>#}
+                {#{% endfor %}#}
+                {#<td><a class="btn btn-primary btn-xs" href="{{ path("building_evolve", {id: building.building.id}) }}">Build#}
+                        {#on {{ building.level + 1 }} level</a></td>#}
+            {#</tr>#}
+        {#{% endfor %}#}
+        {#</tbody>#}
+    {#</table>#}
+
     <table class="table table-striped table-hover ">
         <thead>
         <tr>
             <th>Name</th>
             <th>Level</th>
-            {% for resource in resources %}
-            <th>{{ resource.name }} </th>
-            {% endfor %}
+            <th>Costs</th>
             <th>Build next</th>
         </tr>
         </thead>
         <tbody>
-            {% for building in buildings %}
-                <tr>
-                    <td>{{ building.building.name }}</td>
-                    <td>{{ building.level }}</td>
-                    {% for cost in building.building.costs %}
-                    <td>{{ cost.amount * (1.5 * (building.level + 1)) }}</td>
+        {% for building in buildings %}
+            <tr>
+                <td>{{ building.building.name }}</td>
+                <td>{{ building.level }}</td>
+                <td>
+                    {% for building_cost in building.building.costs %}
+                        <b>{{ building_cost.resource.name }}</b>: {{ building_cost.amount * ((building.level + 1 ) / 2) }}
                     {% endfor %}
-                    <td><a class="btn btn-primary btn-xs" href="{{ path("building_evolve", {id: building.building.id}) }}">Build on {{ building.level + 1 }} level</a></td>
-                </tr>
-            {% endfor %}
+                </td>
+                <td><a class="btn btn-primary btn-xs" href="{{ path("building_evolve", {id: building.building.id}) }}">Build
+                        on {{ building.level + 1 }} level</a></td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
+
 {% endblock %}

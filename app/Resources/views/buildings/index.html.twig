@@ -72,7 +72,7 @@
         {% for building in buildingsInProgress %}
             <tr>
                 <td>{{ building.building.building.name }}</td>
-                <td>{{ building.building.level + 1 }}</td>
+                <td>{{ building.building.level }}</td>
                 <td>
                     {% set difference = date(building.finishesOn|date("Y-m-d H:i:s")).diff(date(now|date("Y-m-d H:i:s"))) %}
                     {{ difference|date("%d \days %h \hours %i \minutes %s \seconds") }}

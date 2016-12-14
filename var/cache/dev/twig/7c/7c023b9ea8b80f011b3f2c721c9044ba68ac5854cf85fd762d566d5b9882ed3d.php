@@ -21,20 +21,20 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44->enter($__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "buildings/index.html.twig"));
+        $__internal_74291179adffba1abf00f0f704bd321c49f73c8f4707f9b8bf4d428031a372f2 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_74291179adffba1abf00f0f704bd321c49f73c8f4707f9b8bf4d428031a372f2->enter($__internal_74291179adffba1abf00f0f704bd321c49f73c8f4707f9b8bf4d428031a372f2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "buildings/index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44->leave($__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44_prof);
+        $__internal_74291179adffba1abf00f0f704bd321c49f73c8f4707f9b8bf4d428031a372f2->leave($__internal_74291179adffba1abf00f0f704bd321c49f73c8f4707f9b8bf4d428031a372f2_prof);
 
     }
 
     // line 3
     public function block_main($context, array $blocks = array())
     {
-        $__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274->enter($__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_00abee9b2498bf245fe10b95fbf96274584d1996047d58599043d71cbe62483a = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_00abee9b2498bf245fe10b95fbf96274584d1996047d58599043d71cbe62483a->enter($__internal_00abee9b2498bf245fe10b95fbf96274584d1996047d58599043d71cbe62483a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 4
         echo "    ";
@@ -186,7 +186,7 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
             echo "</td>
                 <td>";
             // line 75
-            echo twig_escape_filter($this->env, ($this->getAttribute($this->getAttribute($context["building"], "building", array()), "level", array()) + 1), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["building"], "building", array()), "level", array()), "html", null, true);
             echo "</td>
                 <td>
                     ";
@@ -208,7 +208,7 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
     </table>
 ";
         
-        $__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274->leave($__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274_prof);
+        $__internal_00abee9b2498bf245fe10b95fbf96274584d1996047d58599043d71cbe62483a->leave($__internal_00abee9b2498bf245fe10b95fbf96274584d1996047d58599043d71cbe62483a_prof);
 
     }
 
@@ -303,7 +303,7 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
         {% for building in buildingsInProgress %}
             <tr>
                 <td>{{ building.building.building.name }}</td>
-                <td>{{ building.building.level + 1 }}</td>
+                <td>{{ building.building.level }}</td>
                 <td>
                     {% set difference = date(building.finishesOn|date(\"Y-m-d H:i:s\")).diff(date(now|date(\"Y-m-d H:i:s\"))) %}
                     {{ difference|date(\"%d \\days %h \\hours %i \\minutes %s \\seconds\") }}

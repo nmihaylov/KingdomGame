@@ -46,6 +46,12 @@ class Unit
      */
     private $battleUnits;
 
+    /** @var  UnitBuildingDependency[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\UnitBuildingDependency", mappedBy="unit")
+     */
+    private $unitDependencies;
+
     /**
      * @var string
      *
@@ -155,6 +161,22 @@ class Unit
     public function setBattleUnits(array $battleUnits)
     {
         $this->battleUnits = $battleUnits;
+    }
+
+    /**
+     * @return UnitBuildingDependency[]
+     */
+    public function getUnitDependencies()
+    {
+        return $this->unitDependencies;
+    }
+
+    /**
+     * @param UnitBuildingDependency[] $unitDependencies
+     */
+    public function setUnitDependencies(array $unitDependencies)
+    {
+        $this->unitDependencies = $unitDependencies;
     }
 
 

@@ -64,10 +64,10 @@ class Building extends \KingdomGameBundle\Entity\Building implements \Doctrine\O
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'timeCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'kingdomBuildings', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'name'];
+            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'timeCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'kingdomBuildings', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'buildingDependencies', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'name'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'timeCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'kingdomBuildings', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'name'];
+        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'timeCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'kingdomBuildings', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'buildingDependencies', '' . "\0" . 'KingdomGameBundle\\Entity\\Building' . "\0" . 'name'];
     }
 
     /**
@@ -274,6 +274,28 @@ class Building extends \KingdomGameBundle\Entity\Building implements \Doctrine\O
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setKingdomBuildings', [$kingdomBuildings]);
 
         return parent::setKingdomBuildings($kingdomBuildings);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBuildingDependencies()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBuildingDependencies', []);
+
+        return parent::getBuildingDependencies();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setBuildingDependencies(array $buildingDependencies)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuildingDependencies', [$buildingDependencies]);
+
+        return parent::setBuildingDependencies($buildingDependencies);
     }
 
 }

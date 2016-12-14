@@ -40,6 +40,12 @@ class Building
      */
     private $kingdomBuildings;
 
+    /** @var  UnitBuildingDependency[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\UnitBuildingDependency", mappedBy="building")
+     */
+    private $buildingDependencies;
+
     /**
      * @var string
      *
@@ -133,6 +139,22 @@ class Building
     public function setKingdomBuildings(array $kingdomBuildings)
     {
         $this->kingdomBuildings = $kingdomBuildings;
+    }
+
+    /**
+     * @return UnitBuildingDependency[]
+     */
+    public function getBuildingDependencies()
+    {
+        return $this->buildingDependencies;
+    }
+
+    /**
+     * @param UnitBuildingDependency[] $buildingDependencies
+     */
+    public function setBuildingDependencies(array $buildingDependencies)
+    {
+        $this->buildingDependencies = $buildingDependencies;
     }
 
 

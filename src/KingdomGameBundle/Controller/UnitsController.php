@@ -3,9 +3,11 @@
 namespace KingdomGameBundle\Controller;
 
 use KingdomGameBundle\Entity\Kingdom;
+use KingdomGameBundle\Entity\KingdomBuilding;
 use KingdomGameBundle\Entity\KingdomResource;
 use KingdomGameBundle\Entity\KingdomUnit;
 use KingdomGameBundle\Entity\Unit;
+use KingdomGameBundle\Entity\UnitBuildingDependency;
 use KingdomGameBundle\Entity\UnitProgress;
 use KingdomGameBundle\Form\KingdomUnitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,10 +27,38 @@ class UnitsController extends KingdomCurrentController
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
         $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
         $form = $this->createForm(KingdomUnitType::class);
+        $now = new \DateTime("now");
+//        $buildingDependencies =  $this->getDoctrine()->getRepository(UnitBuildingDependency::class)->findAll();
+//        $units[0]->getUnitDependencies()[0]->getBuildingLevel()
+        $unitsInProgress = [];
+        foreach ($kingdom->getUnits() as $kingdomUnit) {
+            /** @var UnitProgress $unitInProgress */
+            $unitInProgress = $this->getDoctrine()->getRepository(UnitProgress::class)->findOneBy([
+                'unit' => $kingdomUnit->getId()
+            ]);
+//            var_dump($kingdomUnit->getId());
+            if ($unitInProgress) {
+                if ($unitInProgress->getFinishesOn() > $now) {
+                    $unitsInProgress[] = $unitInProgress;
+                } else {
+                    $finishedUnit = $unitInProgress->getUnit();
+                    $currentAmount = $finishedUnit->getAmount();
+                    $finishedUnit->setAmount($currentAmount + $unitInProgress->getAmount());
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($finishedUnit);
+                    $em->flush();
+                    $em->remove($unitInProgress);
+                    $em->flush();
+                }
+            }
+//            $unitInProgress->getFinishesOn();
+        }
 
         return $this->render('units/index.html.twig', [
             'units' => $units,
             'kingdom' => $kingdom,
+            'unitsInProgress' => $unitsInProgress,
+            'now' => $now,
             'err' => $err,
             'form' => $form->createView()
         ]);
@@ -43,41 +73,32 @@ class UnitsController extends KingdomCurrentController
     public function armUnits($id, Request $request)
     {
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
-        $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
+//        $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
         $unit = $this->getDoctrine()->getRepository(Unit::class)->find($id);
         $err = null;
         $kingdomUnit = $this->getDoctrine()->getRepository(KingdomUnit::class)->findOneBy([
             'kingdom' => $kingdom,
             'unit' => $unit
         ]);
-        $now = new \DateTime("now");
 
+        $unit->getUnitDependencies();
+        foreach ($unit->getUnitDependencies() as $unitDependency){
 
-        $unitInProgress = $this->getDoctrine()->getRepository(UnitProgress::class)->findOneBy(['unit' =>$kingdomUnit->getId()]);
-
-        if ($unitInProgress) {
-            $isInProgress = $now <= $unitInProgress->getFinishesOn();
-
-            if ($isInProgress){
-                $err = "The task is in progress and will be finished on " . $unitInProgress->getFinishesOn()->format('Y-m-d H:i:s');
-//                return $this->redirectToRoute("units");
-                return $this->render('units/index.html.twig',[
-                    'units' => $units,
-                    'kingdom' => $kingdom,
-                    'err' => $err
-                ]);
-            }
-            else{
-//                TODO: find why this gives error - A new entity was found through the relationship.....
-                $em->remove($unitInProgress);
-                $em->flush();
-
+            $kingdomBuilding = $this->getDoctrine()->getRepository(KingdomBuilding::class)->findOneBy([
+                'building' => $unitDependency->getBuilding()->getId(),
+                'kingdom' => $kingdom->getId()
+            ]);
+            $kingdomBuildingLevel = $kingdomBuilding->getLevel();
+//                var_dump($kingdomBuildingLevel);
+//                var_dump($unitDependency->getBuildingLevel());
+            if ($kingdomBuildingLevel < $unitDependency->getBuildingLevel()){
+//            TODO: add error message!
+                $err = "you do not have the right buildings for this";
+                return $this->redirectToRoute("units");
             }
         }
 
-
         $unitCosts = $unit->getCosts();
-
         $allResources = [];
         foreach ($unitCosts as $cost) {
             $resourcesInKingdom = $this->getDoctrine()->getRepository(KingdomResource::class)->findOneBy([
@@ -89,12 +110,12 @@ class UnitsController extends KingdomCurrentController
             } else {
 //            TODO: add error message!
                 $err = "Not enough resources";
-//                return $this->redirectToRoute("units");
-                return $this->render('units/index.html.twig', [
-                    'units' => $units,
-                    'kingdom' => $kingdom,
-                    'err' => $err
-                ]);
+                return $this->redirectToRoute("units");
+//                return $this->render('units/index.html.twig', [
+//                    'units' => $units,
+//                    'kingdom' => $kingdom,
+//                    'err' => $err
+//                ]);
             }
         }
 
@@ -121,24 +142,22 @@ class UnitsController extends KingdomCurrentController
             $kingdomUnit->setKingdom($kingdom);
         }
 
-//        TO FINISH THIS
+//       TODO: TO GET THIS FROM USER INPUT
         $addedUnits = 5;
-        $currentUnitAmount = $kingdomUnit->getAmount();
-        $kingdomUnit->setAmount($currentUnitAmount + $addedUnits);
 
-        $em->persist($kingdomUnit);
-        $em->flush();
+//        TODO finish when already in progress to throw exception
 
+        $now = new \DateTime("now");
         $unitTimeCostInt = $unit->getTimeCost()->getAmount() * $addedUnits;
         $unitTimeCost = new \DateInterval('PT' . $unitTimeCostInt . 'S');
         $finishesOn = $now->add($unitTimeCost);
         $unitProgress = new UnitProgress();
         $unitProgress->setUnit($kingdomUnit);
         $unitProgress->setFinishesOn($finishesOn);
+        $unitProgress->setAmount($addedUnits);
 
         $em->persist($unitProgress);
         $em->flush();
-
 
 //        return $this->render('units/index.html.twig',[
 //                'units' => $units,

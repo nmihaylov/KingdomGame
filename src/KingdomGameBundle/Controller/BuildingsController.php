@@ -30,7 +30,8 @@ class BuildingsController extends KingdomCurrentController
     public function indexAction($err = null)
     {
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
-
+        /** @var Building $buildings */
+        $buildings = $this->getDoctrine()->getRepository(Building::class)->findAll();
         $now = new \DateTime("now");
         /** @var BuildingProgress[] $buildingsInProgress */
         $buildingsInProgress = [];
@@ -40,7 +41,7 @@ class BuildingsController extends KingdomCurrentController
             ]);
 
             if ($buildingInProgress) {
-                if ($buildingInProgress->getFinishesOn() > $now) {
+                if ($buildingInProgress->getFinishesOn() >= $now) {
                     $buildingsInProgress[] = $buildingInProgress;
                 } else {
                     $finishedBuilding = $buildingInProgress->getBuilding();
@@ -55,7 +56,7 @@ class BuildingsController extends KingdomCurrentController
             }
         }
 
-
+//        $buildings->getKingdomBuildings()[0]->getLevel()
         return $this->render('buildings/index.html.twig', [
             'buildings' => $kingdom->getBuildings(),
             'err' => $err,
@@ -102,7 +103,7 @@ class BuildingsController extends KingdomCurrentController
                 ]);
             }
         }
-//        var_dump($allResources);exit;
+
         $kingdomResources = $this->getDoctrine()->getRepository(KingdomResource::class)->findBy([
             'kingdom' => $kingdom
         ]);
@@ -119,6 +120,16 @@ class BuildingsController extends KingdomCurrentController
             $em->flush();
         }
 
+        if ($kingdomBuilding === null) {
+            $kingdomBuilding = new KingdomBuilding();
+            $kingdomBuilding->setLevel(0);
+            $kingdomBuilding->setBuilding($building);
+            $kingdomBuilding->setKingdom($kingdom);
+        }
+
+
+//        TODO finish when already in progress to throw exception
+
         $buildingInProgress = new BuildingProgress();
         $buildingTimeCostInt = $this->evolveTimeCost($kingdomBuilding->getBuilding()->getTimeCosts()->getAmount(), $currentLevel);
         $buildingTimeCost = new \DateInterval('PT' . $buildingTimeCostInt . 'S');
@@ -130,8 +141,6 @@ class BuildingsController extends KingdomCurrentController
         $em->persist($buildingInProgress);
         $em->flush();
 
-//        $em->persist($kingdomBuilding);
-//        $em->flush();
 
         return $this->redirectToRoute("buildings_list");
     }

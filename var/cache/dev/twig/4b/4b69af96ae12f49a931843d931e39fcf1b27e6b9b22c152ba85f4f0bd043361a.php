@@ -21,20 +21,20 @@ class __TwigTemplate_8bd9d26c9a82d19f3c74869b40665b7bfd7c3c4a3aea5fce629fe95c22e
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7b939e6af2d5d250b6363cacb29c8c94e8bef692b027eaf4929014a1c9d2e3c5 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_7b939e6af2d5d250b6363cacb29c8c94e8bef692b027eaf4929014a1c9d2e3c5->enter($__internal_7b939e6af2d5d250b6363cacb29c8c94e8bef692b027eaf4929014a1c9d2e3c5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "units/index.html.twig"));
+        $__internal_8a987cb977638ee3e2a546be173b67f9fa670efb1f3dba036c8fe029fb3d5456 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_8a987cb977638ee3e2a546be173b67f9fa670efb1f3dba036c8fe029fb3d5456->enter($__internal_8a987cb977638ee3e2a546be173b67f9fa670efb1f3dba036c8fe029fb3d5456_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "units/index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_7b939e6af2d5d250b6363cacb29c8c94e8bef692b027eaf4929014a1c9d2e3c5->leave($__internal_7b939e6af2d5d250b6363cacb29c8c94e8bef692b027eaf4929014a1c9d2e3c5_prof);
+        $__internal_8a987cb977638ee3e2a546be173b67f9fa670efb1f3dba036c8fe029fb3d5456->leave($__internal_8a987cb977638ee3e2a546be173b67f9fa670efb1f3dba036c8fe029fb3d5456_prof);
 
     }
 
     // line 3
     public function block_main($context, array $blocks = array())
     {
-        $__internal_e3f5bb88d0fb086ccafb7d9129b43778b95c26e5d858e39a149a298020c9ace8 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_e3f5bb88d0fb086ccafb7d9129b43778b95c26e5d858e39a149a298020c9ace8->enter($__internal_e3f5bb88d0fb086ccafb7d9129b43778b95c26e5d858e39a149a298020c9ace8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_188ebc25560513bd9ff2089b2c123305de2d3f48abaed0043a77c3df315240ee = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_188ebc25560513bd9ff2089b2c123305de2d3f48abaed0043a77c3df315240ee->enter($__internal_188ebc25560513bd9ff2089b2c123305de2d3f48abaed0043a77c3df315240ee_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 4
         echo "    ";
@@ -50,151 +50,140 @@ class __TwigTemplate_8bd9d26c9a82d19f3c74869b40665b7bfd7c3c4a3aea5fce629fe95c22e
     ";
         }
         // line 10
-        echo "    <h3>Units in Kingdom</h3>
-    <table class=\"table table-striped table-hover \">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-        ";
-        // line 19
+        echo "    <div class=\"col-sm-6\">
+        <h3>Units in Kingdom</h3>
+        <table class=\"table table-striped table-hover \">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            ";
+        // line 20
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["kingdom"]) ? $context["kingdom"] : $this->getContext($context, "kingdom")), "units", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["unit"]) {
-            // line 20
-            echo "            <tr>
-                <td>";
             // line 21
+            echo "                <tr>
+                    <td>";
+            // line 22
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["unit"], "unit", array()), "name", array()), "html", null, true);
             echo "</td>
-                <td>";
-            // line 22
+                    <td>";
+            // line 23
             echo twig_escape_filter($this->env, $this->getAttribute($context["unit"], "amount", array()), "html", null, true);
             echo "</td>
-            </tr>
-        ";
+                </tr>
+            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unit'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 25
-        echo "        </tbody>
-    </table>
+        // line 26
+        echo "            </tbody>
+        </table>
+    </div>
 
-    <h3>Barracks - arm more units</h3>
-    <table class=\"table table-striped table-hover\">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Costs per 1 unit</th>
-            <th>Add units</th>
-        </tr>
-        </thead>
-        <tbody>
 
-        ";
-        // line 39
+    <div class=\"col-sm-12\">
+        <h3>Units in progress</h3>
+        <table class=\"table table-striped table-hover \">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Amount to be added</th>
+                <th>Finish after</th>
+            </tr>
+            </thead>
+            <tbody>
+            ";
+        // line 42
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["units"]) ? $context["units"] : $this->getContext($context, "units")));
+        $context['_seq'] = twig_ensure_traversable((isset($context["unitsInProgress"]) ? $context["unitsInProgress"] : $this->getContext($context, "unitsInProgress")));
         foreach ($context['_seq'] as $context["_key"] => $context["unit"]) {
-            // line 40
-            echo "            <tr>
-                <td>";
-            // line 41
-            echo twig_escape_filter($this->env, $this->getAttribute($context["unit"], "name", array()), "html", null, true);
-            echo "</td>
-                <td>
-                    ";
             // line 43
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["unit"], "costs", array()));
-            foreach ($context['_seq'] as $context["_key"] => $context["unit_cost"]) {
-                // line 44
-                echo "                        <b>";
-                echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["unit_cost"], "resource", array()), "name", array()), "html", null, true);
-                echo "</b>: ";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["unit_cost"], "amount", array()), "html", null, true);
-                echo "
-                    ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unit_cost'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 46
-            echo "                </td>
-                <td>
-                    ";
-            // line 49
-            echo "                    <a class=\"btn btn-primary btn-xs\" href=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("arm_unit", array("id" => $this->getAttribute($context["unit"], "id", array()))), "html", null, true);
-            echo "\">Arm 1 unit</a>
-                </td>
-
-            </tr>
-        ";
+            echo "                <tr>
+                    <td>";
+            // line 44
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($context["unit"], "unit", array()), "unit", array()), "name", array()), "html", null, true);
+            echo "</td>
+                    <td>";
+            // line 45
+            echo twig_escape_filter($this->env, $this->getAttribute($context["unit"], "amount", array()), "html", null, true);
+            echo "</td>
+                    <td>
+                        ";
+            // line 47
+            $context["difference"] = $this->getAttribute(twig_date_converter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["unit"], "finishesOn", array()), "Y-m-d H:i:s")), "diff", array(0 => twig_date_converter($this->env, twig_date_format_filter($this->env, (isset($context["now"]) ? $context["now"] : $this->getContext($context, "now")), "Y-m-d H:i:s"))), "method");
+            // line 48
+            echo "                        ";
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, (isset($context["difference"]) ? $context["difference"] : $this->getContext($context, "difference")), "%d days %h hours %i minutes %s seconds"), "html", null, true);
+            echo "
+                    </td>
+                </tr>
+            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unit'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 54
-        echo "        </tbody>
-    </table>
+        // line 52
+        echo "            </tbody>
+        </table>
+    </div>
 
 
+    <div class=\"col-sm-12\">
+        <h3>Barracks - arm more units</h3>
+        <table class=\"table table-striped table-hover\">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>You need</th>
+                <th>Costs per 1 unit</th>
+                <th>Add units</th>
+            </tr>
+            </thead>
+            <tbody>
 
-
-
-    <h3>Barracks - arm more units</h3>
-    <table class=\"table table-striped table-hover\">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Costs per 1 unit</th>
-            <th>Count</th>
-            <th>Add units</th>
-        </tr>
-        </thead>
-        ";
-        // line 72
-        echo "        <tbody>
-
-
-        ";
-        // line 76
-        echo "        ";
-        // line 77
-        echo "        ";
-        // line 78
-        echo "        ";
-        // line 79
-        echo "        ";
-        // line 80
-        echo "
-        ";
-        // line 81
+            ";
+        // line 70
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["units"]) ? $context["units"] : $this->getContext($context, "units")));
         foreach ($context['_seq'] as $context["_key"] => $context["unit"]) {
-            // line 82
-            echo "            <form name=\"unit\" method=\"post\" action=\"";
-            echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("arm_unit", array("id" => $this->getAttribute($context["unit"], "id", array()))), "html", null, true);
-            echo "\">
-
-                <tr>
+            // line 71
+            echo "                <tr>
                     <td>";
-            // line 85
+            // line 72
             echo twig_escape_filter($this->env, $this->getAttribute($context["unit"], "name", array()), "html", null, true);
             echo "</td>
                     <td>
                         ";
-            // line 87
+            // line 74
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["unit"], "unitDependencies", array()));
+            foreach ($context['_seq'] as $context["_key"] => $context["unitDependency"]) {
+                // line 75
+                echo "                            ";
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["unitDependency"], "building", array()), "name", array()), "html", null, true);
+                echo ": level ";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["unitDependency"], "buildingLevel", array()), "html", null, true);
+                echo "
+                        ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unitDependency'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 77
+            echo "                    </td>
+                    <td>
+                        ";
+            // line 79
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["unit"], "costs", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["unit_cost"]) {
-                // line 88
+                // line 80
                 echo "                            <b>";
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["unit_cost"], "resource", array()), "name", array()), "html", null, true);
                 echo "</b>: ";
@@ -205,39 +194,122 @@ class __TwigTemplate_8bd9d26c9a82d19f3c74869b40665b7bfd7c3c4a3aea5fce629fe95c22e
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unit_cost'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 90
+            // line 82
             echo "                    </td>
                     <td>
-                        <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[unit_id]\" value=\"";
-            // line 92
-            echo twig_escape_filter($this->env, $this->getAttribute($context["unit"], "id", array()), "html", null, true);
-            echo "\">
-                        <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[kingdom_id] value=\"";
-            // line 93
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["kingdom"]) ? $context["kingdom"] : $this->getContext($context, "kingdom")), "id", array()), "html", null, true);
-            echo "\">
-                        <input type=\"number\" id=\"unit_unit_count\" name=\"unit[amount]\" required=\"required\" class=\"form-control\">
-                    </td>
-                    <td>
-                        <button type=\"submit\">Arm units</button>
+                        ";
+            // line 85
+            echo "                        <a class=\"btn btn-primary btn-xs\" href=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("arm_unit", array("id" => $this->getAttribute($context["unit"], "id", array()))), "html", null, true);
+            echo "\">Arm 5 units</a>
                     </td>
 
                 </tr>
-                ";
-            // line 102
-            echo "            </form>
-        ";
+            ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unit'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 104
-        echo "        </tbody>
-    </table>
+        // line 90
+        echo "            </tbody>
+        </table>
+    </div>
+
+
+    <div class=\"col-sm-12\">
+        <h3>Barracks - arm more units</h3>
+        <table class=\"table table-striped table-hover\">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Costs per 1 unit</th>
+                <th>Count</th>
+                <th>Add units</th>
+            </tr>
+            </thead>
+            ";
+        // line 107
+        echo "            <tbody>
+
+
+            ";
+        // line 111
+        echo "            ";
+        // line 112
+        echo "            ";
+        // line 113
+        echo "            ";
+        // line 114
+        echo "            ";
+        // line 115
+        echo "
+            ";
+        // line 116
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["units"]) ? $context["units"] : $this->getContext($context, "units")));
+        foreach ($context['_seq'] as $context["_key"] => $context["unit"]) {
+            // line 117
+            echo "                <form name=\"unit\" method=\"post\" action=\"";
+            echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("arm_unit", array("id" => $this->getAttribute($context["unit"], "id", array()))), "html", null, true);
+            echo "\">
+
+                    <tr>
+                        <td>";
+            // line 120
+            echo twig_escape_filter($this->env, $this->getAttribute($context["unit"], "name", array()), "html", null, true);
+            echo "</td>
+                        <td>
+                            ";
+            // line 122
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["unit"], "costs", array()));
+            foreach ($context['_seq'] as $context["_key"] => $context["unit_cost"]) {
+                // line 123
+                echo "                                <b>";
+                echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["unit_cost"], "resource", array()), "name", array()), "html", null, true);
+                echo "</b>: ";
+                echo twig_escape_filter($this->env, $this->getAttribute($context["unit_cost"], "amount", array()), "html", null, true);
+                echo "
+                            ";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unit_cost'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 125
+            echo "                        </td>
+                        <td>
+                            <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[unit_id]\" value=\"";
+            // line 127
+            echo twig_escape_filter($this->env, $this->getAttribute($context["unit"], "id", array()), "html", null, true);
+            echo "\">
+                            <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[kingdom_id] value=\"";
+            // line 128
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["kingdom"]) ? $context["kingdom"] : $this->getContext($context, "kingdom")), "id", array()), "html", null, true);
+            echo "\">
+                            <input type=\"number\" id=\"unit_unit_count\" name=\"unit[amount]\" required=\"required\"
+                                   class=\"form-control\">
+                        </td>
+                        <td>
+                            <button type=\"submit\">Arm units</button>
+                        </td>
+
+                    </tr>
+                    ";
+            // line 138
+            echo "                </form>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['unit'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 140
+        echo "            </tbody>
+        </table>
+    </div>
 
 ";
         
-        $__internal_e3f5bb88d0fb086ccafb7d9129b43778b95c26e5d858e39a149a298020c9ace8->leave($__internal_e3f5bb88d0fb086ccafb7d9129b43778b95c26e5d858e39a149a298020c9ace8_prof);
+        $__internal_188ebc25560513bd9ff2089b2c123305de2d3f48abaed0043a77c3df315240ee->leave($__internal_188ebc25560513bd9ff2089b2c123305de2d3f48abaed0043a77c3df315240ee_prof);
 
     }
 
@@ -253,7 +325,7 @@ class __TwigTemplate_8bd9d26c9a82d19f3c74869b40665b7bfd7c3c4a3aea5fce629fe95c22e
 
     public function getDebugInfo()
     {
-        return array (  235 => 104,  228 => 102,  217 => 93,  213 => 92,  209 => 90,  198 => 88,  194 => 87,  189 => 85,  182 => 82,  178 => 81,  175 => 80,  173 => 79,  171 => 78,  169 => 77,  167 => 76,  162 => 72,  143 => 54,  131 => 49,  127 => 46,  116 => 44,  112 => 43,  107 => 41,  104 => 40,  100 => 39,  84 => 25,  75 => 22,  71 => 21,  68 => 20,  64 => 19,  53 => 10,  47 => 7,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  306 => 140,  299 => 138,  287 => 128,  283 => 127,  279 => 125,  268 => 123,  264 => 122,  259 => 120,  252 => 117,  248 => 116,  245 => 115,  243 => 114,  241 => 113,  239 => 112,  237 => 111,  232 => 107,  214 => 90,  202 => 85,  198 => 82,  187 => 80,  183 => 79,  179 => 77,  168 => 75,  164 => 74,  159 => 72,  156 => 71,  152 => 70,  132 => 52,  121 => 48,  119 => 47,  114 => 45,  110 => 44,  107 => 43,  103 => 42,  85 => 26,  76 => 23,  72 => 22,  69 => 21,  65 => 20,  53 => 10,  47 => 7,  43 => 5,  40 => 4,  34 => 3,  11 => 1,);
     }
 
     public function getSource()
@@ -267,102 +339,139 @@ class __TwigTemplate_8bd9d26c9a82d19f3c74869b40665b7bfd7c3c4a3aea5fce629fe95c22e
             <strong>{{ err }}</strong>
         </div>
     {% endif %}
-    <h3>Units in Kingdom</h3>
-    <table class=\"table table-striped table-hover \">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for unit in kingdom.units %}
+    <div class=\"col-sm-6\">
+        <h3>Units in Kingdom</h3>
+        <table class=\"table table-striped table-hover \">
+            <thead>
             <tr>
-                <td>{{ unit.unit.name }}</td>
-                <td>{{ unit.amount }}</td>
+                <th>Name</th>
+                <th>Amount</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for unit in kingdom.units %}
+                <tr>
+                    <td>{{ unit.unit.name }}</td>
+                    <td>{{ unit.amount }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
-    <h3>Barracks - arm more units</h3>
-    <table class=\"table table-striped table-hover\">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Costs per 1 unit</th>
-            <th>Add units</th>
-        </tr>
-        </thead>
-        <tbody>
 
-        {% for unit in units %}
+    <div class=\"col-sm-12\">
+        <h3>Units in progress</h3>
+        <table class=\"table table-striped table-hover \">
+            <thead>
             <tr>
-                <td>{{ unit.name }}</td>
-                <td>
-                    {% for unit_cost in unit.costs %}
-                        <b>{{ unit_cost.resource.name }}</b>: {{ unit_cost.amount }}
-                    {% endfor %}
-                </td>
-                <td>
-                    {#TODO: make more than just 1 per click#}
-                    <a class=\"btn btn-primary btn-xs\" href=\"{{ path(\"arm_unit\", {id: unit.id}) }}\">Arm 1 unit</a>
-                </td>
-
+                <th>Name</th>
+                <th>Amount to be added</th>
+                <th>Finish after</th>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for unit in unitsInProgress %}
+                <tr>
+                    <td>{{ unit.unit.unit.name }}</td>
+                    <td>{{ unit.amount }}</td>
+                    <td>
+                        {% set difference = date(unit.finishesOn|date(\"Y-m-d H:i:s\")).diff(date(now|date(\"Y-m-d H:i:s\"))) %}
+                        {{ difference|date(\"%d \\days %h \\hours %i \\minutes %s \\seconds\") }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 
+    <div class=\"col-sm-12\">
+        <h3>Barracks - arm more units</h3>
+        <table class=\"table table-striped table-hover\">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>You need</th>
+                <th>Costs per 1 unit</th>
+                <th>Add units</th>
+            </tr>
+            </thead>
+            <tbody>
 
-
-
-    <h3>Barracks - arm more units</h3>
-    <table class=\"table table-striped table-hover\">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Costs per 1 unit</th>
-            <th>Count</th>
-            <th>Add units</th>
-        </tr>
-        </thead>
-        {#TEST FROM HERE#}
-        <tbody>
-
-
-        {#{{ form_start(form) }}#}
-        {#{{ form_widget(form.unit_count) }}#}
-        {#{{ form_widget(form.unit_id) }}#}
-        {#<button type=\"submit\">Try this!</button>#}
-        {#{{ form_end(form) }}#}
-
-        {% for unit in units %}
-            <form name=\"unit\" method=\"post\" action=\"{{ path(\"arm_unit\", {id: unit.id}) }}\">
-
+            {% for unit in units %}
                 <tr>
                     <td>{{ unit.name }}</td>
+                    <td>
+                        {% for unitDependency in unit.unitDependencies %}
+                            {{ unitDependency.building.name }}: level {{ unitDependency.buildingLevel }}
+                        {% endfor %}
+                    </td>
                     <td>
                         {% for unit_cost in unit.costs %}
                             <b>{{ unit_cost.resource.name }}</b>: {{ unit_cost.amount }}
                         {% endfor %}
                     </td>
                     <td>
-                        <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[unit_id]\" value=\"{{ unit.id }}\">
-                        <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[kingdom_id] value=\"{{ kingdom.id }}\">
-                        <input type=\"number\" id=\"unit_unit_count\" name=\"unit[amount]\" required=\"required\" class=\"form-control\">
-                    </td>
-                    <td>
-                        <button type=\"submit\">Arm units</button>
+                        {#TODO: make more than just 1 per click#}
+                        <a class=\"btn btn-primary btn-xs\" href=\"{{ path(\"arm_unit\", {id: unit.id}) }}\">Arm 5 units</a>
                     </td>
 
                 </tr>
-                {#{{ form_row(form._token) }}#}
-            </form>
-        {% endfor %}
-        </tbody>
-    </table>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class=\"col-sm-12\">
+        <h3>Barracks - arm more units</h3>
+        <table class=\"table table-striped table-hover\">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Costs per 1 unit</th>
+                <th>Count</th>
+                <th>Add units</th>
+            </tr>
+            </thead>
+            {#TEST FROM HERE#}
+            <tbody>
+
+
+            {#{{ form_start(form) }}#}
+            {#{{ form_widget(form.unit_count) }}#}
+            {#{{ form_widget(form.unit_id) }}#}
+            {#<button type=\"submit\">Try this!</button>#}
+            {#{{ form_end(form) }}#}
+
+            {% for unit in units %}
+                <form name=\"unit\" method=\"post\" action=\"{{ path(\"arm_unit\", {id: unit.id}) }}\">
+
+                    <tr>
+                        <td>{{ unit.name }}</td>
+                        <td>
+                            {% for unit_cost in unit.costs %}
+                                <b>{{ unit_cost.resource.name }}</b>: {{ unit_cost.amount }}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[unit_id]\" value=\"{{ unit.id }}\">
+                            <input type=\"hidden\" id=\"unit_unit_id\" name=\"unit[kingdom_id] value=\"{{ kingdom.id }}\">
+                            <input type=\"number\" id=\"unit_unit_count\" name=\"unit[amount]\" required=\"required\"
+                                   class=\"form-control\">
+                        </td>
+                        <td>
+                            <button type=\"submit\">Arm units</button>
+                        </td>
+
+                    </tr>
+                    {#{{ form_row(form._token) }}#}
+                </form>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}";
     }

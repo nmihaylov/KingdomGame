@@ -64,10 +64,10 @@ class Kingdom extends \KingdomGameBundle\Entity\Kingdom implements \Doctrine\ORM
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'x', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'y', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'player', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'resources', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'buildings'];
+            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'x', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'y', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'player', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'resources', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'buildings', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'units'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'x', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'y', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'player', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'resources', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'buildings'];
+        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'name', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'x', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'y', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'player', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'resources', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'buildings', '' . "\0" . 'KingdomGameBundle\\Entity\\Kingdom' . "\0" . 'units'];
     }
 
     /**
@@ -318,6 +318,28 @@ class Kingdom extends \KingdomGameBundle\Entity\Kingdom implements \Doctrine\ORM
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBuildings', [$buildings]);
 
         return parent::setBuildings($buildings);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUnits()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUnits', []);
+
+        return parent::getUnits();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUnits(array $units)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUnits', [$units]);
+
+        return parent::setUnits($units);
     }
 
 }

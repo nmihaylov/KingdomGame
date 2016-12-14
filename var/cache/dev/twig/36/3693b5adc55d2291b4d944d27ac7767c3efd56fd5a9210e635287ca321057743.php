@@ -22,32 +22,32 @@ class __TwigTemplate_37e7129a45728725024c7bda930f99c51d8e8b6947d4d8252935bafe3df
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_7843b24bcb09b18676730868c6a4c07584c73e1bb304d29406e662cbc9731b1f = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_7843b24bcb09b18676730868c6a4c07584c73e1bb304d29406e662cbc9731b1f->enter($__internal_7843b24bcb09b18676730868c6a4c07584c73e1bb304d29406e662cbc9731b1f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "battles/allKingdoms.html.twig"));
+        $__internal_ad6bae39c46582573bad4ffe1f105134663f1d6c063ed375b8d3eea061be976b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_ad6bae39c46582573bad4ffe1f105134663f1d6c063ed375b8d3eea061be976b->enter($__internal_ad6bae39c46582573bad4ffe1f105134663f1d6c063ed375b8d3eea061be976b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "battles/allKingdoms.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_7843b24bcb09b18676730868c6a4c07584c73e1bb304d29406e662cbc9731b1f->leave($__internal_7843b24bcb09b18676730868c6a4c07584c73e1bb304d29406e662cbc9731b1f_prof);
+        $__internal_ad6bae39c46582573bad4ffe1f105134663f1d6c063ed375b8d3eea061be976b->leave($__internal_ad6bae39c46582573bad4ffe1f105134663f1d6c063ed375b8d3eea061be976b_prof);
 
     }
 
     // line 3
     public function block_body_id($context, array $blocks = array())
     {
-        $__internal_c305b34f1cc11d3c813efe987ea743be429b0f88293c81b0a780eeb342e9eba6 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_c305b34f1cc11d3c813efe987ea743be429b0f88293c81b0a780eeb342e9eba6->enter($__internal_c305b34f1cc11d3c813efe987ea743be429b0f88293c81b0a780eeb342e9eba6_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
+        $__internal_79eeb1ac3b1ec6c7e6db61b755e9cf26849c183c00a18114afdc2373cf45a233 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_79eeb1ac3b1ec6c7e6db61b755e9cf26849c183c00a18114afdc2373cf45a233->enter($__internal_79eeb1ac3b1ec6c7e6db61b755e9cf26849c183c00a18114afdc2373cf45a233_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
 
         echo "map";
         
-        $__internal_c305b34f1cc11d3c813efe987ea743be429b0f88293c81b0a780eeb342e9eba6->leave($__internal_c305b34f1cc11d3c813efe987ea743be429b0f88293c81b0a780eeb342e9eba6_prof);
+        $__internal_79eeb1ac3b1ec6c7e6db61b755e9cf26849c183c00a18114afdc2373cf45a233->leave($__internal_79eeb1ac3b1ec6c7e6db61b755e9cf26849c183c00a18114afdc2373cf45a233_prof);
 
     }
 
     // line 5
     public function block_main($context, array $blocks = array())
     {
-        $__internal_a4a6a1ea4fdffd6c2cd77ced2f86fe613bd13dae2fd457aa5f3a954f0986297b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_a4a6a1ea4fdffd6c2cd77ced2f86fe613bd13dae2fd457aa5f3a954f0986297b->enter($__internal_a4a6a1ea4fdffd6c2cd77ced2f86fe613bd13dae2fd457aa5f3a954f0986297b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_6907cc50283a0a0bb0fb9d3650c77e5b5382e598f4b7e54b31934ca4d12e3d0d = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_6907cc50283a0a0bb0fb9d3650c77e5b5382e598f4b7e54b31934ca4d12e3d0d->enter($__internal_6907cc50283a0a0bb0fb9d3650c77e5b5382e598f4b7e54b31934ca4d12e3d0d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 6
         echo "
@@ -89,24 +89,34 @@ class __TwigTemplate_37e7129a45728725024c7bda930f99c51d8e8b6947d4d8252935bafe3df
             echo " : ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["kingdom"], "y", array()), "html", null, true);
             echo "</td>
-                <td><a href=\"";
+                ";
             // line 25
-            echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("view_kingdom", array("id" => $this->getAttribute($context["kingdom"], "id", array()))), "html", null, true);
-            echo "\">View</a></td>
-            </tr>
+            if (twig_in_filter($context["kingdom"], (isset($context["myKingdoms"]) ? $context["myKingdoms"] : $this->getContext($context, "myKingdoms")))) {
+                // line 26
+                echo "                    <td>-</td>
+                ";
+            } else {
+                // line 28
+                echo "                    <td><a href=\"";
+                echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("view_kingdom", array("id" => $this->getAttribute($context["kingdom"], "id", array()))), "html", null, true);
+                echo "\">View</a></td>
+                ";
+            }
+            // line 30
+            echo "            </tr>
             ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['kingdom'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 28
+        // line 32
         echo "        </tboday>
     </table>
 </div>
 
 ";
         
-        $__internal_a4a6a1ea4fdffd6c2cd77ced2f86fe613bd13dae2fd457aa5f3a954f0986297b->leave($__internal_a4a6a1ea4fdffd6c2cd77ced2f86fe613bd13dae2fd457aa5f3a954f0986297b_prof);
+        $__internal_6907cc50283a0a0bb0fb9d3650c77e5b5382e598f4b7e54b31934ca4d12e3d0d->leave($__internal_6907cc50283a0a0bb0fb9d3650c77e5b5382e598f4b7e54b31934ca4d12e3d0d_prof);
 
     }
 
@@ -122,7 +132,7 @@ class __TwigTemplate_37e7129a45728725024c7bda930f99c51d8e8b6947d4d8252935bafe3df
 
     public function getDebugInfo()
     {
-        return array (  103 => 28,  94 => 25,  87 => 24,  81 => 22,  75 => 20,  73 => 19,  70 => 18,  66 => 17,  53 => 6,  47 => 5,  35 => 3,  11 => 1,);
+        return array (  113 => 32,  106 => 30,  100 => 28,  96 => 26,  94 => 25,  87 => 24,  81 => 22,  75 => 20,  73 => 19,  70 => 18,  66 => 17,  53 => 6,  47 => 5,  35 => 3,  11 => 1,);
     }
 
     public function getSource()
@@ -151,7 +161,11 @@ class __TwigTemplate_37e7129a45728725024c7bda930f99c51d8e8b6947d4d8252935bafe3df
                 <td>{{ kingdom.name }}</td>
                 {% endif %}
                 <td>{{ kingdom.x }} : {{ kingdom.y }}</td>
-                <td><a href=\"{{ path(\"view_kingdom\", {id: kingdom.id}) }}\">View</a></td>
+                {% if kingdom in myKingdoms %}
+                    <td>-</td>
+                {% else %}
+                    <td><a href=\"{{ path(\"view_kingdom\", {id: kingdom.id}) }}\">View</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tboday>

@@ -20,11 +20,12 @@ class UnitProgress
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var KingdomUnit
      *
-     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\KingdomUnit", inversedBy="unitProgress")
-     * @ORM\JoinColumn(name="unit_id")
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\KingdomUnit", mappedBy="unitProgress", cascade={"persist"})
+     * @ORM\JoinColumn(name="kingdom_unit_id")
      */
     private $unit;
 
@@ -34,6 +35,14 @@ class UnitProgress
      * @ORM\Column(name="finishes_on", type="datetime")
      */
     private $finishesOn;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="amount", type="integer")
+     *
+     */
+    private $amount;
 
 
     /**
@@ -69,5 +78,40 @@ class UnitProgress
     {
         return $this->finishesOn;
     }
+
+    /**
+     * @return KingdomUnit
+     */
+    public function getUnit()
+    {
+        return $this->unit;
+    }
+
+    /**
+     * @param KingdomUnit $unit
+     */
+    public function setUnit(KingdomUnit $unit)
+    {
+        $this->unit = $unit;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * @param int $amount
+     */
+    public function setAmount(int $amount)
+    {
+        $this->amount = $amount;
+    }
+
+
+
 }
 

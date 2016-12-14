@@ -22,34 +22,34 @@ class __TwigTemplate_83ff36281952d417e6b3ef1af3261bb63bf9d055eae3def84d6869b66fa
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_c10dfaea5d5297ba36b1666e69748362ce863554d2f606803a6a6cc10cf5d9c3 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_c10dfaea5d5297ba36b1666e69748362ce863554d2f606803a6a6cc10cf5d9c3->enter($__internal_c10dfaea5d5297ba36b1666e69748362ce863554d2f606803a6a6cc10cf5d9c3_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "battles/kingdom.html.twig"));
+        $__internal_2440175a08068040998c6f14043964c1338a947f83522a2bc760f666f63e28dd = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_2440175a08068040998c6f14043964c1338a947f83522a2bc760f666f63e28dd->enter($__internal_2440175a08068040998c6f14043964c1338a947f83522a2bc760f666f63e28dd_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "battles/kingdom.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_c10dfaea5d5297ba36b1666e69748362ce863554d2f606803a6a6cc10cf5d9c3->leave($__internal_c10dfaea5d5297ba36b1666e69748362ce863554d2f606803a6a6cc10cf5d9c3_prof);
+        $__internal_2440175a08068040998c6f14043964c1338a947f83522a2bc760f666f63e28dd->leave($__internal_2440175a08068040998c6f14043964c1338a947f83522a2bc760f666f63e28dd_prof);
 
     }
 
     // line 3
     public function block_body_id($context, array $blocks = array())
     {
-        $__internal_66a4ea2184641bac12a0cba1931a2dc742e95d7835fa3ffa37de8b0400c6a2f8 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_66a4ea2184641bac12a0cba1931a2dc742e95d7835fa3ffa37de8b0400c6a2f8->enter($__internal_66a4ea2184641bac12a0cba1931a2dc742e95d7835fa3ffa37de8b0400c6a2f8_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
+        $__internal_a4c68f595e56445e1ac819e3b8c95926472e5b1804ab338fcaba4ec71f4737a6 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_a4c68f595e56445e1ac819e3b8c95926472e5b1804ab338fcaba4ec71f4737a6->enter($__internal_a4c68f595e56445e1ac819e3b8c95926472e5b1804ab338fcaba4ec71f4737a6_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "body_id"));
 
         // line 4
         echo "
 ";
         
-        $__internal_66a4ea2184641bac12a0cba1931a2dc742e95d7835fa3ffa37de8b0400c6a2f8->leave($__internal_66a4ea2184641bac12a0cba1931a2dc742e95d7835fa3ffa37de8b0400c6a2f8_prof);
+        $__internal_a4c68f595e56445e1ac819e3b8c95926472e5b1804ab338fcaba4ec71f4737a6->leave($__internal_a4c68f595e56445e1ac819e3b8c95926472e5b1804ab338fcaba4ec71f4737a6_prof);
 
     }
 
     // line 7
     public function block_main($context, array $blocks = array())
     {
-        $__internal_f0078bc4688a2655becd7df2f1a72f6d53cc6997f6475e00d2a3b75db2ce7006 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_f0078bc4688a2655becd7df2f1a72f6d53cc6997f6475e00d2a3b75db2ce7006->enter($__internal_f0078bc4688a2655becd7df2f1a72f6d53cc6997f6475e00d2a3b75db2ce7006_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_0b3041d223a1466939c3929d97534c24c8f225f4cb74c5d29c25da908fb9d01f = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_0b3041d223a1466939c3929d97534c24c8f225f4cb74c5d29c25da908fb9d01f->enter($__internal_0b3041d223a1466939c3929d97534c24c8f225f4cb74c5d29c25da908fb9d01f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 8
         echo "<h2>";
@@ -63,7 +63,7 @@ class __TwigTemplate_83ff36281952d417e6b3ef1af3261bb63bf9d055eae3def84d6869b66fa
         echo "\" class=\"btn btn-danger\">Attack this kingdom</a>
     ";
         // line 11
-        echo "    <a href=\"#\" class=\"btn btn-info\">View more about this kingdom</a>
+        echo "    <a href=\"#\" class=\"btn btn-info\">View more about this kingdom - NOT WORKING</a>
     <h3>Buildings</h3>
     <table class=\"table table-striped table-hover \">
         <thead>
@@ -135,7 +135,7 @@ class __TwigTemplate_83ff36281952d417e6b3ef1af3261bb63bf9d055eae3def84d6869b66fa
 
 ";
         
-        $__internal_f0078bc4688a2655becd7df2f1a72f6d53cc6997f6475e00d2a3b75db2ce7006->leave($__internal_f0078bc4688a2655becd7df2f1a72f6d53cc6997f6475e00d2a3b75db2ce7006_prof);
+        $__internal_0b3041d223a1466939c3929d97534c24c8f225f4cb74c5d29c25da908fb9d01f->leave($__internal_0b3041d223a1466939c3929d97534c24c8f225f4cb74c5d29c25da908fb9d01f_prof);
 
     }
 
@@ -166,7 +166,7 @@ class __TwigTemplate_83ff36281952d417e6b3ef1af3261bb63bf9d055eae3def84d6869b66fa
 <h2>{{ kingdom.player.username }}'s kingdom - {{ kingdom.name }}</h2>
     <a href=\"{{ path(\"attack_kingdom\", {id: kingdom.id}) }}\" class=\"btn btn-danger\">Attack this kingdom</a>
     {#TODO: to finish the belwo funcitonality#}
-    <a href=\"#\" class=\"btn btn-info\">View more about this kingdom</a>
+    <a href=\"#\" class=\"btn btn-info\">View more about this kingdom - NOT WORKING</a>
     <h3>Buildings</h3>
     <table class=\"table table-striped table-hover \">
         <thead>

@@ -3,6 +3,7 @@
 namespace KingdomGameBundle\Controller;
 
 use KingdomGameBundle\Entity\Building;
+use KingdomGameBundle\Entity\BuildingProgress;
 use KingdomGameBundle\Entity\GameResource;
 use KingdomGameBundle\Entity\Kingdom;
 use KingdomGameBundle\Entity\KingdomBuilding;
@@ -23,17 +24,43 @@ class BuildingsController extends KingdomCurrentController
     /**
      * @Route("/buildings", name="buildings_list")
      *
+     * @param null $err
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction()
+    public function indexAction($err = null)
     {
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
-//        $resources = $this->getDoctrine()->getRepository(GameResource::class)->findAll();
 
-//        $kingdom->getBuildings()[0]->getBuilding()->getCosts()
+        $now = new \DateTime("now");
+        /** @var BuildingProgress[] $buildingsInProgress */
+        $buildingsInProgress = [];
+        foreach ($kingdom->getBuildings() as $kingdomBuilding) {
+            $buildingInProgress = $this->getDoctrine()->getRepository(BuildingProgress::class)->findOneBy([
+                'building' => $kingdomBuilding->getId()
+            ]);
+
+            if ($buildingInProgress) {
+                if ($buildingInProgress->getFinishesOn() > $now) {
+                    $buildingsInProgress[] = $buildingInProgress;
+                } else {
+                    $finishedBuilding = $buildingInProgress->getBuilding();
+                    $currentLevel = $finishedBuilding->getLevel();
+                    $finishedBuilding->setLevel($currentLevel + 1);
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($finishedBuilding);
+                    $em->flush();
+                    $em->remove($buildingInProgress);
+                    $em->flush();
+                }
+            }
+        }
+
 
         return $this->render('buildings/index.html.twig', [
             'buildings' => $kingdom->getBuildings(),
+            'err' => $err,
+            'buildingsInProgress' => $buildingsInProgress,
+            'now' => $now
 //            'resources' => $resources,
 //            'kingdom_buildings' => $this->calculateBuildingsCosts($this->getKingdomId())
         ]);
@@ -46,11 +73,10 @@ class BuildingsController extends KingdomCurrentController
      */
     public function evolve($id)
     {
-//        TODO: to finish this + time cost and so on and so on!
 
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
         $building = $this->getDoctrine()->getRepository(Building::class)->find($id);
-
+        $err = null;
         $kingdomBuilding = $this->getDoctrine()->getRepository(KingdomBuilding::class)
             ->findOneBy([
                 'kingdom' => $kingdom,
@@ -67,17 +93,23 @@ class BuildingsController extends KingdomCurrentController
             if ($resourcesInKingdom->getAmount() >= ($this->evolveResourceCost($cost->getAmount(), $currentLevel))) {
                 $allResources[$cost->getResource()->getName()] = $this->evolveResourceCost($cost->getAmount(), $currentLevel);
             } else {
-//            TODO: add error message!
-                $this->redirectToRoute("buildings_list");
+//            TODO: change the way of error message shows!
+                $err = "Not enough resources";
+//                return $this->redirectToRoute("buildings_list", ['err', $err]);
+                return $this->render('buildings/index.html.twig', [
+                    'buildings' => $kingdom->getBuildings(),
+                    'err' => $err
+                ]);
             }
         }
-
+//        var_dump($allResources);exit;
         $kingdomResources = $this->getDoctrine()->getRepository(KingdomResource::class)->findBy([
             'kingdom' => $kingdom
         ]);
         $em = $this->getDoctrine()->getManager();
         foreach ($kingdomResources as $kingdomResource) {
             $name = $kingdomResource->getResource()->getName();
+
             $cost = $allResources[$name];
 
             $kingdomResource->setAmount(
@@ -87,17 +119,19 @@ class BuildingsController extends KingdomCurrentController
             $em->flush();
         }
 
-        $kingdomBuilding->setLevel($currentLevel + 1);
-//        $buildingTimeCostInt = $this->evolveTimeCost($kingdomBuilding->getBuilding()->getTimeCosts()->getAmount(), $currentLevel);
-//        $buildingTimeCost = new \DateInterval('PT'.$buildingTimeCostInt.'S');
-//        $now = new \DateTime("now");
-//        $finishesOn = $now->add($buildingTimeCost);
-//        $kingdomBuilding->getBuildingProgress()->setFinishesOn($finishesOn);
-//        var_dump($finishesOn);
-//        var_dump($kingdomBuilding->getBuildingProgress()->getFinishesOn());exit;
+        $buildingInProgress = new BuildingProgress();
+        $buildingTimeCostInt = $this->evolveTimeCost($kingdomBuilding->getBuilding()->getTimeCosts()->getAmount(), $currentLevel);
+        $buildingTimeCost = new \DateInterval('PT' . $buildingTimeCostInt . 'S');
+        $now = new \DateTime("now");
+        $buildingFinishOn = $now->add($buildingTimeCost);
+        $buildingInProgress->setBuilding($kingdomBuilding);
+        $buildingInProgress->setFinishesOn($buildingFinishOn);
 
-        $em->persist($kingdomBuilding);
+        $em->persist($buildingInProgress);
         $em->flush();
+
+//        $em->persist($kingdomBuilding);
+//        $em->flush();
 
         return $this->redirectToRoute("buildings_list");
     }
@@ -182,7 +216,7 @@ class BuildingsController extends KingdomCurrentController
      */
     public function evolveResourceCost(int $cost, int $buildingCurrentLevel)
     {
-        if ($buildingCurrentLevel == 0){
+        if ($buildingCurrentLevel == 0) {
             $buildingCurrentLevel = 1;
         }
         return $cost * (($buildingCurrentLevel + 1) / 2);
@@ -195,7 +229,7 @@ class BuildingsController extends KingdomCurrentController
      */
     public function evolveTimeCost(int $cost, int $buildingCurrentLevel)
     {
-        if ($buildingCurrentLevel == 0){
+        if ($buildingCurrentLevel == 0) {
             $buildingCurrentLevel = 1;
         }
         return $cost * (($buildingCurrentLevel + 1) / 2);

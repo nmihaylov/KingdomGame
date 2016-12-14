@@ -22,7 +22,11 @@
                 <td>{{ kingdom.name }}</td>
                 {% endif %}
                 <td>{{ kingdom.x }} : {{ kingdom.y }}</td>
-                <td><a href="{{ path("view_kingdom", {id: kingdom.id}) }}">View</a></td>
+                {% if kingdom in myKingdoms %}
+                    <td>-</td>
+                {% else %}
+                    <td><a href="{{ path("view_kingdom", {id: kingdom.id}) }}">View</a></td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tboday>

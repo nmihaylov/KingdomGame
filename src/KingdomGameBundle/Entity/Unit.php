@@ -32,13 +32,19 @@ class Unit
      *
      * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\UnitCostTime", mappedBy="unit")
      */
-    private $timeCosts;
+    private $timeCost;
 
     /** @var  KingdomUnit[]
      *
      * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\KingdomUnit", mappedBy="unit")
      */
     private $kingdomUnits;
+
+    /** @var  BattleUnits[]
+     *
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\BattleUnits", mappedBy="battle")
+     */
+    private $battleUnits;
 
     /**
      * @var string
@@ -50,6 +56,7 @@ class Unit
     public function __construct()
     {
         $this->costs = new ArrayCollection();
+        $this->battleUnits = new ArrayCollection();
     }
 
     /**
@@ -105,17 +112,17 @@ class Unit
     /**
      * @return UnitCostTime
      */
-    public function getTimeCosts()
+    public function getTimeCost()
     {
-        return $this->timeCosts;
+        return $this->timeCost;
     }
 
     /**
-     * @param UnitCostTime $timeCosts
+     * @param UnitCostTime $timeCost
      */
-    public function setTimeCosts(UnitCostTime $timeCosts)
+    public function setTimeCost(UnitCostTime $timeCost)
     {
-        $this->timeCosts = $timeCosts;
+        $this->timeCost = $timeCost;
     }
 
     /**
@@ -133,6 +140,23 @@ class Unit
     {
         $this->kingdomUnits = $kingdomUnits;
     }
+
+    /**
+     * @return BattleUnits[]
+     */
+    public function getBattleUnits()
+    {
+        return $this->battleUnits;
+    }
+
+    /**
+     * @param BattleUnits[] $battleUnits
+     */
+    public function setBattleUnits(array $battleUnits)
+    {
+        $this->battleUnits = $battleUnits;
+    }
+
 
 }
 

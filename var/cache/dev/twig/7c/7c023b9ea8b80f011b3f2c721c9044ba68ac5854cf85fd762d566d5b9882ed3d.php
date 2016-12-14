@@ -21,105 +21,117 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_9747038a66ffacfdcd80e8bd30c968e733a9d79b182ccdfe34ec7f10b51b06c7 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_9747038a66ffacfdcd80e8bd30c968e733a9d79b182ccdfe34ec7f10b51b06c7->enter($__internal_9747038a66ffacfdcd80e8bd30c968e733a9d79b182ccdfe34ec7f10b51b06c7_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "buildings/index.html.twig"));
+        $__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44->enter($__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "buildings/index.html.twig"));
 
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_9747038a66ffacfdcd80e8bd30c968e733a9d79b182ccdfe34ec7f10b51b06c7->leave($__internal_9747038a66ffacfdcd80e8bd30c968e733a9d79b182ccdfe34ec7f10b51b06c7_prof);
+        $__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44->leave($__internal_cf64a24655ff2dcb017e55116e192d03be39916d7d96b0f2da6ba8c9087e7b44_prof);
 
     }
 
     // line 3
     public function block_main($context, array $blocks = array())
     {
-        $__internal_4025f4bde500eb693a4de8aaf648af8c2b093a9d5e036098d1b33893943010e5 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_4025f4bde500eb693a4de8aaf648af8c2b093a9d5e036098d1b33893943010e5->enter($__internal_4025f4bde500eb693a4de8aaf648af8c2b093a9d5e036098d1b33893943010e5_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
+        $__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274->enter($__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "main"));
 
         // line 4
         echo "    ";
         // line 5
-        echo "        ";
+        echo "    ";
         // line 6
-        echo "        ";
+        echo "    ";
         // line 7
-        echo "            ";
+        echo "    ";
         // line 8
-        echo "            ";
+        echo "    ";
         // line 9
-        echo "            ";
+        echo "    ";
         // line 10
-        echo "                ";
+        echo "    ";
         // line 11
-        echo "            ";
+        echo "    ";
         // line 12
-        echo "            ";
+        echo "    ";
         // line 13
-        echo "        ";
+        echo "    ";
         // line 14
-        echo "        ";
+        echo "    ";
         // line 15
-        echo "        ";
+        echo "    ";
         // line 16
-        echo "        ";
+        echo "    ";
         // line 17
-        echo "            ";
+        echo "    ";
         // line 18
-        echo "                ";
+        echo "    ";
         // line 19
-        echo "                ";
+        echo "    ";
         // line 20
-        echo "                ";
+        echo "    ";
         // line 21
-        echo "                    ";
+        echo "    ";
         // line 22
-        echo "                ";
+        echo "    ";
         // line 23
-        echo "                ";
+        echo "    ";
         // line 24
-        echo "                        ";
+        echo "    ";
         // line 25
-        echo "            ";
+        echo "    ";
         // line 26
-        echo "        ";
+        echo "    ";
         // line 27
-        echo "        ";
+        echo "    ";
         // line 28
         echo "    ";
         // line 29
-        echo "
-    <table class=\"table table-striped table-hover \">
+        echo "    ";
+        if ((isset($context["err"]) ? $context["err"] : $this->getContext($context, "err"))) {
+            // line 30
+            echo "        <div class=\"alert alert-dismissible alert-danger\">
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+            <strong>";
+            // line 32
+            echo twig_escape_filter($this->env, (isset($context["err"]) ? $context["err"] : $this->getContext($context, "err")), "html", null, true);
+            echo "</strong>
+        </div>
+    ";
+        }
+        // line 35
+        echo "    <table class=\"table table-striped table-hover \">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Level</th>
-            <th>Costs</th>
+            <th>Current level</th>
+            <th>Costs for next level</th>
             <th>Build next</th>
         </tr>
         </thead>
         <tbody>
         ";
-        // line 40
+        // line 45
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["buildings"]) ? $context["buildings"] : $this->getContext($context, "buildings")));
         foreach ($context['_seq'] as $context["_key"] => $context["building"]) {
-            // line 41
+            // line 46
             echo "            <tr>
                 <td>";
-            // line 42
+            // line 47
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["building"], "building", array()), "name", array()), "html", null, true);
             echo "</td>
                 <td>";
-            // line 43
+            // line 48
             echo twig_escape_filter($this->env, $this->getAttribute($context["building"], "level", array()), "html", null, true);
             echo "</td>
                 <td>
                     ";
-            // line 45
+            // line 50
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($context["building"], "building", array()), "costs", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["building_cost"]) {
-                // line 46
+                // line 51
                 echo "                        <b>";
                 echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["building_cost"], "resource", array()), "name", array()), "html", null, true);
                 echo "</b>: ";
@@ -130,14 +142,15 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['building_cost'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 48
+            // line 53
             echo "                </td>
-                <td><a class=\"btn btn-primary btn-xs\" href=\"";
-            // line 49
+                <td>
+                    <a class=\"btn btn-primary btn-xs\" href=\"";
+            // line 55
             echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("building_evolve", array("id" => $this->getAttribute($this->getAttribute($context["building"], "building", array()), "id", array()))), "html", null, true);
             echo "\">Build
                         on ";
-            // line 50
+            // line 56
             echo twig_escape_filter($this->env, ($this->getAttribute($context["building"], "level", array()) + 1), "html", null, true);
             echo " level</a></td>
             </tr>
@@ -146,13 +159,56 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['building'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 53
+        // line 59
         echo "        </tbody>
     </table>
 
+    <h3>Buildings in porgress</h3>
+    <table class=\"table table-striped table-hover \">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Level to be</th>
+            <th>Finish after</th>
+        </tr>
+        </thead>
+        <tbody>
+        ";
+        // line 72
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["buildingsInProgress"]) ? $context["buildingsInProgress"] : $this->getContext($context, "buildingsInProgress")));
+        foreach ($context['_seq'] as $context["_key"] => $context["building"]) {
+            // line 73
+            echo "            <tr>
+                <td>";
+            // line 74
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($this->getAttribute($context["building"], "building", array()), "building", array()), "name", array()), "html", null, true);
+            echo "</td>
+                <td>";
+            // line 75
+            echo twig_escape_filter($this->env, ($this->getAttribute($this->getAttribute($context["building"], "building", array()), "level", array()) + 1), "html", null, true);
+            echo "</td>
+                <td>
+                    ";
+            // line 77
+            $context["difference"] = $this->getAttribute(twig_date_converter($this->env, twig_date_format_filter($this->env, $this->getAttribute($context["building"], "finishesOn", array()), "Y-m-d H:i:s")), "diff", array(0 => twig_date_converter($this->env, twig_date_format_filter($this->env, (isset($context["now"]) ? $context["now"] : $this->getContext($context, "now")), "Y-m-d H:i:s"))), "method");
+            // line 78
+            echo "                    ";
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, (isset($context["difference"]) ? $context["difference"] : $this->getContext($context, "difference")), "%d days %h hours %i minutes %s seconds"), "html", null, true);
+            echo "
+                </td>
+            </tr>
+        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['building'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 82
+        echo "        </tbody>
+    </table>
 ";
         
-        $__internal_4025f4bde500eb693a4de8aaf648af8c2b093a9d5e036098d1b33893943010e5->leave($__internal_4025f4bde500eb693a4de8aaf648af8c2b093a9d5e036098d1b33893943010e5_prof);
+        $__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274->leave($__internal_a889384e73ec8cf50bf9f6db8762eaea04965eb9badf2272378403883080d274_prof);
 
     }
 
@@ -168,7 +224,7 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
 
     public function getDebugInfo()
     {
-        return array (  150 => 53,  141 => 50,  137 => 49,  134 => 48,  123 => 46,  119 => 45,  114 => 43,  110 => 42,  107 => 41,  103 => 40,  90 => 29,  88 => 28,  86 => 27,  84 => 26,  82 => 25,  80 => 24,  78 => 23,  76 => 22,  74 => 21,  72 => 20,  70 => 19,  68 => 18,  66 => 17,  64 => 16,  62 => 15,  60 => 14,  58 => 13,  56 => 12,  54 => 11,  52 => 10,  50 => 9,  48 => 8,  46 => 7,  44 => 6,  42 => 5,  40 => 4,  34 => 3,  11 => 1,);
+        return array (  207 => 82,  196 => 78,  194 => 77,  189 => 75,  185 => 74,  182 => 73,  178 => 72,  163 => 59,  154 => 56,  150 => 55,  146 => 53,  135 => 51,  131 => 50,  126 => 48,  122 => 47,  119 => 46,  115 => 45,  103 => 35,  97 => 32,  93 => 30,  90 => 29,  88 => 28,  86 => 27,  84 => 26,  82 => 25,  80 => 24,  78 => 23,  76 => 22,  74 => 21,  72 => 20,  70 => 19,  68 => 18,  66 => 17,  64 => 16,  62 => 15,  60 => 14,  58 => 13,  56 => 12,  54 => 11,  52 => 10,  50 => 9,  48 => 8,  46 => 7,  44 => 6,  42 => 5,  40 => 4,  34 => 3,  11 => 1,);
     }
 
     public function getSource()
@@ -177,37 +233,42 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
 
 {% block main %}
     {#<table class=\"table table-striped table-hover \">#}
-        {#<thead>#}
-        {#<tr>#}
-            {#<th>Name</th>#}
-            {#<th>Level</th>#}
-            {#{% for resource in resources %}#}
-                {#<th>{{ resource.name }} </th>#}
-            {#{% endfor %}#}
-            {#<th>Build next</th>#}
-        {#</tr>#}
-        {#</thead>#}
-        {#<tbody>#}
-        {#{% for building in buildings %}#}
-            {#<tr>#}
-                {#<td>{{ building.building.name }}</td>#}
-                {#<td>{{ building.level }}</td>#}
-                {#{% for cost in building.building.costs %}#}
-                    {#<td>{{ cost.amount * (1.5 * (building.level + 1)) }}</td>#}
-                {#{% endfor %}#}
-                {#<td><a class=\"btn btn-primary btn-xs\" href=\"{{ path(\"building_evolve\", {id: building.building.id}) }}\">Build#}
-                        {#on {{ building.level + 1 }} level</a></td>#}
-            {#</tr>#}
-        {#{% endfor %}#}
-        {#</tbody>#}
+    {#<thead>#}
+    {#<tr>#}
+    {#<th>Name</th>#}
+    {#<th>Level</th>#}
+    {#{% for resource in resources %}#}
+    {#<th>{{ resource.name }} </th>#}
+    {#{% endfor %}#}
+    {#<th>Build next</th>#}
+    {#</tr>#}
+    {#</thead>#}
+    {#<tbody>#}
+    {#{% for building in buildings %}#}
+    {#<tr>#}
+    {#<td>{{ building.building.name }}</td>#}
+    {#<td>{{ building.level }}</td>#}
+    {#{% for cost in building.building.costs %}#}
+    {#<td>{{ cost.amount * (1.5 * (building.level + 1)) }}</td>#}
+    {#{% endfor %}#}
+    {#<td><a class=\"btn btn-primary btn-xs\" href=\"{{ path(\"building_evolve\", {id: building.building.id}) }}\">Build#}
+    {#on {{ building.level + 1 }} level</a></td>#}
+    {#</tr>#}
+    {#{% endfor %}#}
+    {#</tbody>#}
     {#</table>#}
-
+    {% if err %}
+        <div class=\"alert alert-dismissible alert-danger\">
+            <button type=\"button\" class=\"close\" data-dismiss=\"alert\">&times;</button>
+            <strong>{{ err }}</strong>
+        </div>
+    {% endif %}
     <table class=\"table table-striped table-hover \">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Level</th>
-            <th>Costs</th>
+            <th>Current level</th>
+            <th>Costs for next level</th>
             <th>Build next</th>
         </tr>
         </thead>
@@ -221,13 +282,36 @@ class __TwigTemplate_c289e5ce1d205f2fc5a8d23f654b1b99ba913f4d4bbb2d5d1b741d70c05
                         <b>{{ building_cost.resource.name }}</b>: {{ building_cost.amount * ((building.level + 1 ) / 2) }}
                     {% endfor %}
                 </td>
-                <td><a class=\"btn btn-primary btn-xs\" href=\"{{ path(\"building_evolve\", {id: building.building.id}) }}\">Build
+                <td>
+                    <a class=\"btn btn-primary btn-xs\" href=\"{{ path(\"building_evolve\", {id: building.building.id}) }}\">Build
                         on {{ building.level + 1 }} level</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+    <h3>Buildings in porgress</h3>
+    <table class=\"table table-striped table-hover \">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Level to be</th>
+            <th>Finish after</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for building in buildingsInProgress %}
+            <tr>
+                <td>{{ building.building.building.name }}</td>
+                <td>{{ building.building.level + 1 }}</td>
+                <td>
+                    {% set difference = date(building.finishesOn|date(\"Y-m-d H:i:s\")).diff(date(now|date(\"Y-m-d H:i:s\"))) %}
+                    {{ difference|date(\"%d \\days %h \\hours %i \\minutes %s \\seconds\") }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}";
     }
 }

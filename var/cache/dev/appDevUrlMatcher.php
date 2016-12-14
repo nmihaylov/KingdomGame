@@ -121,7 +121,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
         if (0 === strpos($pathinfo, '/buildings')) {
             // buildings_list
             if ($pathinfo === '/buildings') {
-                return array (  '_controller' => 'KingdomGameBundle\\Controller\\BuildingsController::indexAction',  '_route' => 'buildings_list',);
+                return array (  'err' => NULL,  '_controller' => 'KingdomGameBundle\\Controller\\BuildingsController::indexAction',  '_route' => 'buildings_list',);
             }
 
             // building_evolve
@@ -166,7 +166,7 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         // units
         if ($pathinfo === '/units') {
-            return array (  '_controller' => 'KingdomGameBundle\\Controller\\UnitsController::indexAction',  '_route' => 'units',);
+            return array (  'err' => NULL,  '_controller' => 'KingdomGameBundle\\Controller\\UnitsController::indexAction',  '_route' => 'units',);
         }
 
         // arm_unit

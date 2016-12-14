@@ -24,7 +24,7 @@ class UnitCostTime
     /**
      * @var Unit
      *
-     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\Unit", inversedBy="timeCosts")
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\Unit", inversedBy="timeCost")
      * @ORM\JoinColumn(name="unit_id")
      */
     private $unit;

@@ -64,10 +64,10 @@ class Unit extends \KingdomGameBundle\Entity\Unit implements \Doctrine\ORM\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'timeCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'kingdomUnits', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'name'];
+            return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'timeCost', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'kingdomUnits', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'battleUnits', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'name'];
         }
 
-        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'timeCosts', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'kingdomUnits', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'name'];
+        return ['__isInitialized__', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'id', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'costs', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'timeCost', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'kingdomUnits', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'battleUnits', '' . "\0" . 'KingdomGameBundle\\Entity\\Unit' . "\0" . 'name'];
     }
 
     /**
@@ -235,23 +235,23 @@ class Unit extends \KingdomGameBundle\Entity\Unit implements \Doctrine\ORM\Proxy
     /**
      * {@inheritDoc}
      */
-    public function getTimeCosts()
+    public function getTimeCost()
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTimeCosts', []);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getTimeCost', []);
 
-        return parent::getTimeCosts();
+        return parent::getTimeCost();
     }
 
     /**
      * {@inheritDoc}
      */
-    public function setTimeCosts(\KingdomGameBundle\Entity\UnitCostTime $timeCosts)
+    public function setTimeCost(\KingdomGameBundle\Entity\UnitCostTime $timeCost)
     {
 
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTimeCosts', [$timeCosts]);
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setTimeCost', [$timeCost]);
 
-        return parent::setTimeCosts($timeCosts);
+        return parent::setTimeCost($timeCost);
     }
 
     /**
@@ -274,6 +274,28 @@ class Unit extends \KingdomGameBundle\Entity\Unit implements \Doctrine\ORM\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setKingdomUnits', [$kingdomUnits]);
 
         return parent::setKingdomUnits($kingdomUnits);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getBattleUnits()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getBattleUnits', []);
+
+        return parent::getBattleUnits();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setBattleUnits(array $battleUnits)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setBattleUnits', [$battleUnits]);
+
+        return parent::setBattleUnits($battleUnits);
     }
 
 }

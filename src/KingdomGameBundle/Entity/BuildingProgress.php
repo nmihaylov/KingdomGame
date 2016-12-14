@@ -24,14 +24,14 @@ class BuildingProgress
      * @var KingdomBuilding
      *
      * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\KingdomBuilding", inversedBy="buildingProgress")
-     * @ORM\JoinColumn(name="building_id")
+     * @ORM\JoinColumn(name="kingdom_building_id")
      */
     private $building;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="finishes_on", type="datetimetz")
+     * @ORM\Column(name="finishes_on", type="datetime")
      */
     private $finishesOn;
 

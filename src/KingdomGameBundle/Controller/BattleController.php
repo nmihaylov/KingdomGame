@@ -3,9 +3,12 @@
 namespace KingdomGameBundle\Controller;
 
 use KingdomGameBundle\Entity\Kingdom;
+use KingdomGameBundle\Entity\KingdomUnit;
 use KingdomGameBundle\Entity\Player;
+use KingdomGameBundle\Form\BattleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class BattleController extends KingdomCurrentController
 {
@@ -51,17 +54,25 @@ class BattleController extends KingdomCurrentController
     /**
      * @Route("/attackKingdom/{id}",name="attack_kingdom")
      * @param $id
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function attack($id){
+    public function attack($id, Request $request){
 
         $myKingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
         $attackedKingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($id);
 
+        $form = $this->createForm(BattleType::class);
+        $form->handleRequest($request);
 
-        return $this->render('battles/sendUnits.html.twig', [
+        if ($form->isSubmitted() && $form->isValid()) {
+//            var_dump($form->get())
+        }
+
+            return $this->render('battles/sendUnits.html.twig', [
             'attackedKingdom' => $attackedKingdom,
-            'myKingdom' => $myKingdom
+            'myKingdom' => $myKingdom,
+            'form' => $form->createView()
         ]);
     }
 }

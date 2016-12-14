@@ -2,37 +2,42 @@
 
 {% block main %}
     {#<table class="table table-striped table-hover ">#}
-        {#<thead>#}
-        {#<tr>#}
-            {#<th>Name</th>#}
-            {#<th>Level</th>#}
-            {#{% for resource in resources %}#}
-                {#<th>{{ resource.name }} </th>#}
-            {#{% endfor %}#}
-            {#<th>Build next</th>#}
-        {#</tr>#}
-        {#</thead>#}
-        {#<tbody>#}
-        {#{% for building in buildings %}#}
-            {#<tr>#}
-                {#<td>{{ building.building.name }}</td>#}
-                {#<td>{{ building.level }}</td>#}
-                {#{% for cost in building.building.costs %}#}
-                    {#<td>{{ cost.amount * (1.5 * (building.level + 1)) }}</td>#}
-                {#{% endfor %}#}
-                {#<td><a class="btn btn-primary btn-xs" href="{{ path("building_evolve", {id: building.building.id}) }}">Build#}
-                        {#on {{ building.level + 1 }} level</a></td>#}
-            {#</tr>#}
-        {#{% endfor %}#}
-        {#</tbody>#}
+    {#<thead>#}
+    {#<tr>#}
+    {#<th>Name</th>#}
+    {#<th>Level</th>#}
+    {#{% for resource in resources %}#}
+    {#<th>{{ resource.name }} </th>#}
+    {#{% endfor %}#}
+    {#<th>Build next</th>#}
+    {#</tr>#}
+    {#</thead>#}
+    {#<tbody>#}
+    {#{% for building in buildings %}#}
+    {#<tr>#}
+    {#<td>{{ building.building.name }}</td>#}
+    {#<td>{{ building.level }}</td>#}
+    {#{% for cost in building.building.costs %}#}
+    {#<td>{{ cost.amount * (1.5 * (building.level + 1)) }}</td>#}
+    {#{% endfor %}#}
+    {#<td><a class="btn btn-primary btn-xs" href="{{ path("building_evolve", {id: building.building.id}) }}">Build#}
+    {#on {{ building.level + 1 }} level</a></td>#}
+    {#</tr>#}
+    {#{% endfor %}#}
+    {#</tbody>#}
     {#</table>#}
-
+    {% if err %}
+        <div class="alert alert-dismissible alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>{{ err }}</strong>
+        </div>
+    {% endif %}
     <table class="table table-striped table-hover ">
         <thead>
         <tr>
             <th>Name</th>
-            <th>Level</th>
-            <th>Costs</th>
+            <th>Current level</th>
+            <th>Costs for next level</th>
             <th>Build next</th>
         </tr>
         </thead>
@@ -46,11 +51,34 @@
                         <b>{{ building_cost.resource.name }}</b>: {{ building_cost.amount * ((building.level + 1 ) / 2) }}
                     {% endfor %}
                 </td>
-                <td><a class="btn btn-primary btn-xs" href="{{ path("building_evolve", {id: building.building.id}) }}">Build
+                <td>
+                    <a class="btn btn-primary btn-xs" href="{{ path("building_evolve", {id: building.building.id}) }}">Build
                         on {{ building.level + 1 }} level</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
+    <h3>Buildings in porgress</h3>
+    <table class="table table-striped table-hover ">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Level to be</th>
+            <th>Finish after</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for building in buildingsInProgress %}
+            <tr>
+                <td>{{ building.building.building.name }}</td>
+                <td>{{ building.building.level + 1 }}</td>
+                <td>
+                    {% set difference = date(building.finishesOn|date("Y-m-d H:i:s")).diff(date(now|date("Y-m-d H:i:s"))) %}
+                    {{ difference|date("%d \days %h \hours %i \minutes %s \seconds") }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

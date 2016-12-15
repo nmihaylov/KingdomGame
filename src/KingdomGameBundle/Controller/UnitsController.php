@@ -94,18 +94,15 @@ class UnitsController extends KingdomCurrentController
                     'kingdom' => $kingdom->getId()
                 ]);
                 $kingdomBuildingLevel = $kingdomBuilding->getLevel();
-//                var_dump($kingdomBuildingLevel);
-//                var_dump($unitDependency->getBuildingLevel());
 
                 if ($kingdomBuildingLevel < $unitDependency->getBuildingLevel()) {
-//            TODO: add error message!
-                    $err = "you do not have the right buildings for this";
+                    $this->addFlash(
+                        'error',
+                        'You do not have the right buildings for this'
+                    );
                     return $this->redirectToRoute("units");
                 }
             }
-
-
-//       TODO: TO GET THIS FROM USER INPUT
 
 
             $unitCosts = $unit->getCosts();
@@ -118,15 +115,12 @@ class UnitsController extends KingdomCurrentController
                 if ($resourcesInKingdom->getAmount() >= ($cost->getAmount() * $addedUnits)) {
                     $allResources[$cost->getResource()->getName()] = ($cost->getAmount() * $addedUnits);
                 } else {
-//            TODO: add error message!
-                    $err = "Not enough resources";
-                    $this->addFlash("error", $err);
+
+                    $this->addFlash(
+                        'error',
+                        'Not enough resources'
+                    );
                     return $this->redirectToRoute("units");
-//                return $this->render('units/index.html.twig', [
-//                    'units' => $units,
-//                    'kingdom' => $kingdom,
-//                    'err' => $err
-//                ]);
                 }
             }
 
@@ -169,11 +163,6 @@ class UnitsController extends KingdomCurrentController
             $em->flush();
         }
 
-//        return $this->render('units/index.html.twig',[
-//                'units' => $units,
-//                'kingdom' => $kingdom,
-//                'err' => $err
-//            ]);
 
         return $this->redirectToRoute("units");
     }

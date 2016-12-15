@@ -90,14 +90,42 @@ class BattleController extends KingdomCurrentController
             $battle->setDefender($attackedKingdom);
             $battle->setImpactOn($impactOn);
 
-            $this->getDoctrine()->getManager()->persist($battle);
-            $this->getDoctrine()->getManager()->flush();
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($battle);
+            $em->flush();
+//            $currentUnits = $myKingdom->getUnits();
+//            foreach ($currentUnits as $currnetUnit){
+//
+//            }
+//            var_dump($myKingdomUnits[0]->getUnit());
+            $myKingdomUnits = [];
+            foreach ($myKingdom->getUnits() as $kingdomUnit){
+                $myKingdomUnits[] = $kingdomUnit->getUnit()->getName();
+            }
+
             foreach ($battle->getBattleUnits() as $battleUnit) {
+//                TODO: to getDoctrine and check if have this unit and if have the amount for this attack
+//                if ($battleUnit->getAmount() > 0){
+//                    $battleUnitName = $battleUnit->getUnit()->getName();
+//                    if (!in_array($battleUnitName, $myKingdomUnits)){
+//                        $this->addFlash(
+//                            'error',
+//                            'You do not have' . $battleUnit->getUnit()->getName()
+//                        );
+//                        var_dump($battleUnitName);exit;
+//                        return $this->redirectToRoute("attack_kingdom", ['id' => $id]);
+//                    }
+//                }
+                var_dump('here2');exit;
+
                 $battleUnit->setBattle($battle);
             }
-            $this->getDoctrine()->getManager()->persist($battle);
-            $this->getDoctrine()->getManager()->flush();
-            return $this->redirectToRoute("attack_kingdom", $id);
+
+//            var_dump($battle);exit;
+            $em->persist($battle);
+            $em->flush();
+            return $this->redirectToRoute("attack_kingdom", ['id' => $id]);
         }
 
             return $this->render('battles/sendUnits.html.twig', [

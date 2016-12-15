@@ -24,10 +24,10 @@ class BuildingsController extends KingdomCurrentController
     /**
      * @Route("/buildings", name="buildings_list")
      *
-     * @param null $err
+
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction($err = null)
+    public function indexAction()
     {
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
         /** @var Building $buildings */
@@ -56,14 +56,11 @@ class BuildingsController extends KingdomCurrentController
             }
         }
 
-//        $buildings->getKingdomBuildings()[0]->getLevel()
+
         return $this->render('buildings/index.html.twig', [
             'buildings' => $kingdom->getBuildings(),
-            'err' => $err,
             'buildingsInProgress' => $buildingsInProgress,
             'now' => $now
-//            'resources' => $resources,
-//            'kingdom_buildings' => $this->calculateBuildingsCosts($this->getKingdomId())
         ]);
     }
 
@@ -77,7 +74,7 @@ class BuildingsController extends KingdomCurrentController
 
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
         $building = $this->getDoctrine()->getRepository(Building::class)->find($id);
-        $err = null;
+
         $kingdomBuilding = $this->getDoctrine()->getRepository(KingdomBuilding::class)
             ->findOneBy([
                 'kingdom' => $kingdom,
@@ -94,13 +91,11 @@ class BuildingsController extends KingdomCurrentController
             if ($resourcesInKingdom->getAmount() >= ($this->evolveResourceCost($cost->getAmount(), $currentLevel))) {
                 $allResources[$cost->getResource()->getName()] = $this->evolveResourceCost($cost->getAmount(), $currentLevel);
             } else {
-//            TODO: change the way of error message shows!
-                $err = "Not enough resources";
-//                return $this->redirectToRoute("buildings_list", ['err', $err]);
-                return $this->render('buildings/index.html.twig', [
-                    'buildings' => $kingdom->getBuildings(),
-                    'err' => $err
-                ]);
+                $this->addFlash(
+                    'error',
+                    'Not enough resources'
+                );
+                return $this->redirectToRoute("buildings_list");
             }
         }
 
@@ -145,78 +140,6 @@ class BuildingsController extends KingdomCurrentController
         return $this->redirectToRoute("buildings_list");
     }
 
-    /**
-     * @Route("buildings/evolve/{id}", name="building_evolve")
-     * @param $id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-//    public function evolve($id)
-//    {
-//        $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
-//        $currentBuilding = $this->getDoctrine()->getRepository(KingdomBuilding::class)->find($id);
-//        $currentLevel = $currentBuilding->getLevel();
-//        $costs = $currentBuilding->getBuilding()->getCosts();
-//
-//        $em = $this->getDoctrine()->getManager();
-//
-//        foreach ($costs as $cost) {
-//            $resourcesInKingdom = $this->getDoctrine()->getRepository(KingdomResource::class)->findOneBy([
-//                'resource' => $cost->getResource(),
-//                'kingdom' => $kingdom
-//            ]);
-//            if ($resourcesInKingdom->getAmount() - $this->evolveCost($cost->getAmount(), $currentLevel) < 0) {
-//                return $this->redirectToRoute("buildings_list");
-//            }
-//            $resourcesInKingdom->setAmount($resourcesInKingdom->getAmount() - $this->evolveCost($cost->getAmount(), $currentLevel));
-//            $currentBuilding->setLevel($currentLevel + 1);
-//            $em->persist($resourcesInKingdom);
-//            $em->flush();
-//        }
-//
-////        $currentBuilding->getBuilding()
-//        $em->persist($currentBuilding->getBuilding());
-//        $em->flush();
-//
-//        return $this->redirectToRoute("buildings_list");
-//    }
-
-    /**
-     * @Route("/buildings/costs", name="buildings_costs")
-     * @param null $kingdomId
-     * @return array
-     */
-//    not used
-    public function calculateBuildingsCosts($kingdomId)
-    {
-//        if (!$kingdomId){
-//            $kingdomId = $this->getKingdomId();
-//        }
-        $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($kingdomId);
-        $kingdomBuildings = $this->getDoctrine()->getRepository(KingdomBuilding::class)
-            ->findBy([
-                'kingdom' => $kingdom
-            ]);
-
-        $allCosts = [];
-        /** @var KingdomBuilding[] $kingdomBuildings */
-        foreach ($kingdomBuildings as $kingdomBuilding) {
-
-            $buildingCurrentLevel = $kingdomBuilding->getLevel();
-            $buildingCosts = $kingdomBuilding->getBuilding()->getCosts();
-            foreach ($buildingCosts as $buildingCost) {
-                $newCost = $this->evolveResourceCost($buildingCost->getAmount(), $buildingCurrentLevel);
-//                $buildingCost->setAmount($newCost);
-                $allCosts[$kingdomBuilding->getBuilding()->getName()][$buildingCost->getResource()->getName()] = $newCost;
-            }
-        }
-//        var_dump($allCosts);exit;
-//        var_dump($allCosts[0]->getBuilding()->getCosts()[0]);
-//        var_dump($allCosts[0]->getBuilding()->getCosts()[0]->getAmount());
-//        var_dump($allCosts[0]->getBuilding()->getCosts()[0]->getResource()->getName());
-//        exit;
-        return $allCosts;
-
-    }
 
     /**
      * @param int $cost

@@ -65,99 +65,109 @@ class UnitsController extends KingdomCurrentController
     }
 
     /**
-     * @Route("armUnit/{id}", name="arm_unit")
-     * @param $id
+     * @Route("armUnit", name="arm_unit")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function armUnits($id, Request $request)
+    public function armUnits(Request $request)
     {
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
 //        $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
-        $unit = $this->getDoctrine()->getRepository(Unit::class)->find($id);
-        $err = null;
-        $kingdomUnit = $this->getDoctrine()->getRepository(KingdomUnit::class)->findOneBy([
-            'kingdom' => $kingdom,
-            'unit' => $unit
-        ]);
+        $kingdomUnit = new KingdomUnit();
+        $form = $this->createForm(KingdomUnitType::class, $kingdomUnit);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $unit = $kingdomUnit->getUnit();
+            $exist = $this->getDoctrine()->getRepository(KingdomUnit::class)
+                ->findOneBy(['kingdom' => $kingdomUnit->getKingdom(), 'unit' => $kingdomUnit->getUnit()]);
+            $addedUnits = $kingdomUnit->getAmount();
+            if ($exist) {
+                $kingdomUnit = $exist;
+            } else {
+                $kingdomUnit->setAmount(0);
+            }
+            $err = null;
+            foreach ($unit->getUnitDependencies() as $unitDependency) {
 
-        $unit->getUnitDependencies();
-        foreach ($unit->getUnitDependencies() as $unitDependency){
-
-            $kingdomBuilding = $this->getDoctrine()->getRepository(KingdomBuilding::class)->findOneBy([
-                'building' => $unitDependency->getBuilding()->getId(),
-                'kingdom' => $kingdom->getId()
-            ]);
-            $kingdomBuildingLevel = $kingdomBuilding->getLevel();
+                $kingdomBuilding = $this->getDoctrine()->getRepository(KingdomBuilding::class)->findOneBy([
+                    'building' => $unitDependency->getBuilding()->getId(),
+                    'kingdom' => $kingdom->getId()
+                ]);
+                $kingdomBuildingLevel = $kingdomBuilding->getLevel();
 //                var_dump($kingdomBuildingLevel);
 //                var_dump($unitDependency->getBuildingLevel());
-            if ($kingdomBuildingLevel < $unitDependency->getBuildingLevel()){
-//            TODO: add error message!
-                $err = "you do not have the right buildings for this";
-                return $this->redirectToRoute("units");
-            }
-        }
 
-        $unitCosts = $unit->getCosts();
-        $allResources = [];
-        foreach ($unitCosts as $cost) {
-            $resourcesInKingdom = $this->getDoctrine()->getRepository(KingdomResource::class)->findOneBy([
-                'resource' => $cost->getResource(),
-                'kingdom' => $kingdom
-            ]);
-            if ($resourcesInKingdom->getAmount() >= $cost->getAmount()) {
-                $allResources[$cost->getResource()->getName()] = $cost->getAmount();
-            } else {
+                if ($kingdomBuildingLevel < $unitDependency->getBuildingLevel()) {
 //            TODO: add error message!
-                $err = "Not enough resources";
-                return $this->redirectToRoute("units");
+                    $err = "you do not have the right buildings for this";
+                    return $this->redirectToRoute("units");
+                }
+            }
+
+
+//       TODO: TO GET THIS FROM USER INPUT
+
+
+            $unitCosts = $unit->getCosts();
+            $allResources = [];
+            foreach ($unitCosts as $cost) {
+                $resourcesInKingdom = $this->getDoctrine()->getRepository(KingdomResource::class)->findOneBy([
+                    'resource' => $cost->getResource(),
+                    'kingdom' => $kingdom
+                ]);
+                if ($resourcesInKingdom->getAmount() >= ($cost->getAmount() * $addedUnits)) {
+                    $allResources[$cost->getResource()->getName()] = ($cost->getAmount() * $addedUnits);
+                } else {
+//            TODO: add error message!
+                    $err = "Not enough resources";
+                    $this->addFlash("error", $err);
+                    return $this->redirectToRoute("units");
 //                return $this->render('units/index.html.twig', [
 //                    'units' => $units,
 //                    'kingdom' => $kingdom,
 //                    'err' => $err
 //                ]);
+                }
             }
-        }
 
-        $kingdomResources = $this->getDoctrine()->getRepository(KingdomResource::class)->findBy([
-            'kingdom' => $kingdom
-        ]);
+            $kingdomResources = $this->getDoctrine()->getRepository(KingdomResource::class)->findBy([
+                'kingdom' => $kingdom
+            ]);
 
-        $em = $this->getDoctrine()->getManager();
-        foreach ($kingdomResources as $kingdomResource) {
-            $name = $kingdomResource->getResource()->getName();
-            $cost = $allResources[$name];
+            $em = $this->getDoctrine()->getManager();
+            foreach ($kingdomResources as $kingdomResource) {
+                $name = $kingdomResource->getResource()->getName();
+                $cost = $allResources[$name];
 
-            $kingdomResource->setAmount(
-                $kingdomResource->getAmount() - $cost
-            );
-            $em->persist($kingdomResource);
-            $em->flush();
-        }
+                $kingdomResource->setAmount(
+                    $kingdomResource->getAmount() - $cost
+                );
+                $em->persist($kingdomResource);
+                $em->flush();
+            }
 
-        if ($kingdomUnit === null) {
-            $kingdomUnit = new KingdomUnit();
-            $kingdomUnit->setAmount(0);
-            $kingdomUnit->setUnit($unit);
-            $kingdomUnit->setKingdom($kingdom);
-        }
+            if ($kingdomUnit === null) {
+                $kingdomUnit = new KingdomUnit();
+                $kingdomUnit->setAmount(0);
+                $kingdomUnit->setUnit($unit);
+                $kingdomUnit->setKingdom($kingdom);
+            }
 
-//       TODO: TO GET THIS FROM USER INPUT
-        $addedUnits = 5;
 
 //        TODO finish when already in progress to throw exception
 
-        $now = new \DateTime("now");
-        $unitTimeCostInt = $unit->getTimeCost()->getAmount() * $addedUnits;
-        $unitTimeCost = new \DateInterval('PT' . $unitTimeCostInt . 'S');
-        $finishesOn = $now->add($unitTimeCost);
-        $unitProgress = new UnitProgress();
-        $unitProgress->setUnit($kingdomUnit);
-        $unitProgress->setFinishesOn($finishesOn);
-        $unitProgress->setAmount($addedUnits);
+            $now = new \DateTime("now");
+            $unitTimeCostInt = $unit->getTimeCost()->getAmount() * $addedUnits;
+            $unitTimeCost = new \DateInterval('PT' . $unitTimeCostInt . 'S');
+            $finishesOn = $now->add($unitTimeCost);
+            $unitProgress = new UnitProgress();
+            $unitProgress->setUnit($kingdomUnit);
+            $unitProgress->setFinishesOn($finishesOn);
+            $unitProgress->setAmount($addedUnits);
 
-        $em->persist($unitProgress);
-        $em->flush();
+            $em->persist($unitProgress);
+            $em->flush();
+        }
 
 //        return $this->render('units/index.html.twig',[
 //                'units' => $units,

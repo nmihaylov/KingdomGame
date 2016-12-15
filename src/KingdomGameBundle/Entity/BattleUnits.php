@@ -24,7 +24,7 @@ class BattleUnits
     /**
      * @var Battle
      *
-     * @ORM\ManyToOne(targetEntity="KingdomGameBundle\Entity\Battle", inversedBy="battleUnits")
+     * @ORM\ManyToOne(targetEntity="KingdomGameBundle\Entity\Battle", inversedBy="battleUnits", cascade={"persist"})
      * @ORM\JoinColumn(name="battle_id")
      */
     private $battle;
@@ -32,7 +32,7 @@ class BattleUnits
     /**
      * @var Unit
      *
-     * @ORM\ManyToOne(targetEntity="KingdomGameBundle\Entity\Unit", inversedBy="battleUnits")
+     * @ORM\ManyToOne(targetEntity="KingdomGameBundle\Entity\Unit", inversedBy="battleUnits", cascade={"persist"})
      * @ORM\JoinColumn(name="unit_id")
      */
     private $unit;

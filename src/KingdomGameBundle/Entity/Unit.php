@@ -179,6 +179,9 @@ class Unit
         $this->unitDependencies = $unitDependencies;
     }
 
-
+    public function __toString()
+    {
+        return (string)$this->id;
+    }
 }
 

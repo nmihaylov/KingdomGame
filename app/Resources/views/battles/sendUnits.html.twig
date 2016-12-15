@@ -67,11 +67,17 @@
         {#</table>#}
 
         <div class="col-sm-3">
-            {{ form_start(form) }}
+            <form method="post">
             <h3>Send units</h3>
-            {{ form_widget(form) }}
+            {% for i,unit in units %}
+                {{ unit.name }}
+                <input type="hidden" name="battle[battleUnits][{{ i }}][unit]" value="{{ unit.id }}"/>
+                <input type="number" name="battle[battleUnits][{{ i }}][amount]" value="0"/>
+                <br/>
+            {% endfor %}
+            {{  form_row(form._token) }}
             <button type="submit" class="btn btn-danger">Fight!</button>
-            {{ form_end(form) }}
+            </form>
         </div>
     </div>
 {% endblock %}

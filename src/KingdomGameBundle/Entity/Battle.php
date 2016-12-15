@@ -2,6 +2,7 @@
 
 namespace KingdomGameBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 
@@ -24,7 +25,7 @@ class Battle
 
     /** @var  BattleUnits[]
      *
-     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\BattleUnits", mappedBy="battle")
+     * @ORM\OneToMany(targetEntity="KingdomGameBundle\Entity\BattleUnits", mappedBy="battle", cascade={"persist"})
      */
     private $battleUnits;
 
@@ -101,7 +102,7 @@ class Battle
     /**
      * @param BattleUnits[] $battleUnits
      */
-    public function setBattleUnits(array $battleUnits)
+    public function setBattleUnits($battleUnits)
     {
         $this->battleUnits = $battleUnits;
     }
@@ -137,6 +138,14 @@ class Battle
     {
         $this->defender = $defender;
     }
+
+    public function addBattleUnit(BattleUnits $battleUnits)
+    {
+        $this->battleUnits[] = $battleUnits;
+        $battleUnits->setBattle($this);
+    }
+
+
 
 }
 

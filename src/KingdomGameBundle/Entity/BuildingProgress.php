@@ -20,6 +20,7 @@ class BuildingProgress
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
     /**
      * @var KingdomBuilding
      *

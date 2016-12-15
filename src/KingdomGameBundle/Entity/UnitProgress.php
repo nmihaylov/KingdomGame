@@ -24,7 +24,7 @@ class UnitProgress
     /**
      * @var KingdomUnit
      *
-     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\KingdomUnit", mappedBy="unitProgress")
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\KingdomUnit", inversedBy="unitProgress", cascade={"persist"})
      * @ORM\JoinColumn(name="kingdom_unit_id")
      */
     private $unit;

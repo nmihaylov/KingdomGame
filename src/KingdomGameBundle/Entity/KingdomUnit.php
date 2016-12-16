@@ -135,6 +135,5 @@ class KingdomUnit
         $this->unitProgress = $unitProgress;
     }
 
-
 }
 

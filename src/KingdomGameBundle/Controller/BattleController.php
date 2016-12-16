@@ -2,6 +2,7 @@
 
 namespace KingdomGameBundle\Controller;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use KingdomGameBundle\Entity\Battle;
 use KingdomGameBundle\Entity\BattleUnits;
 use KingdomGameBundle\Entity\Kingdom;
@@ -29,7 +30,7 @@ class BattleController extends KingdomCurrentController
         $kingdoms = $this->getDoctrine()->getRepository(Kingdom::class)->findAll();
 
         $arrAllKingdomsCoordinates = [];
-        foreach ($kingdoms as $kingdom){
+        foreach ($kingdoms as $kingdom) {
             $arrAllKingdomsCoordinates[$kingdom->getX()][$kingdom->getY()] = $kingdom->getId();
 //            var_dump($kingdom->getX());
 //            var_dump($kingdom->getY());
@@ -45,13 +46,14 @@ class BattleController extends KingdomCurrentController
      * @Route("/kingdom/{id}", name="view_kingdom")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showKingdom($id){
+    public function showKingdom($id)
+    {
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->findOneBy([
             'id' => $id
         ]);
 
-        return $this->render('battles/kingdom.html.twig',[
-           'kingdom' => $kingdom
+        return $this->render('battles/kingdom.html.twig', [
+            'kingdom' => $kingdom
         ]);
     }
 
@@ -61,78 +63,134 @@ class BattleController extends KingdomCurrentController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function attack($id, Request $request){
-
+    public function attack($id, Request $request)
+    {
         $myKingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
         $attackedKingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($id);
         $units = $this->getDoctrine()->getRepository(Unit::class)->findAll();
-        $buildingTimeCostInt = 10;
-        $buildingTimeCost = new \DateInterval('PT' . $buildingTimeCostInt . 'S');
-        $now = new \DateTime("now");
-        $impactOn = $now->add($buildingTimeCost);
         $battle = new Battle();
-//
-//        $battleUnit = new BattleUnits();
-//        $battleUnit->setAmount(12);
-//        $battleUnit->setUnit($units[0]);
-//        $battle->getBattleUnits()->add($battleUnit);
-//
-//        $battleUnit = new BattleUnits();
-//        $battleUnit->setAmount(7);
-//        $battleUnit->setUnit($units[1]);
-//        $battle->getBattleUnits()->add($battleUnit);
 
         $form = $this->createForm(BattleType::class, $battle);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
+//            TODO: calculate time
+            $roadTimeCostInt = 60;
+            $roadTimeCost = new \DateInterval('PT' . $roadTimeCostInt . 'S');
+            $now = new \DateTime("now");
+            $impactOn = $now->add($roadTimeCost);
+
+            $roadBackTimeCost =  new \DateInterval('PT' . $roadTimeCostInt * 2 . 'S');
+            $unitsReturnOn = $now->add($roadBackTimeCost);
+
             $battle->setAttacker($myKingdom);
             $battle->setDefender($attackedKingdom);
             $battle->setImpactOn($impactOn);
+            $battle->setUnitsReturn($unitsReturnOn);
+            $battle->setFinished(0);
+            $battle->setUnitsReturned(0);
 
             $em = $this->getDoctrine()->getManager();
 
+//            Adding tha battle
             $em->persist($battle);
             $em->flush();
-//            $currentUnits = $myKingdom->getUnits();
-//            foreach ($currentUnits as $currnetUnit){
-//
-//            }
-//            var_dump($myKingdomUnits[0]->getUnit());
-            $myKingdomUnits = [];
-            foreach ($myKingdom->getUnits() as $kingdomUnit){
-                $myKingdomUnits[] = $kingdomUnit->getUnit()->getName();
-            }
 
+//            Set battle for each battleUnit
             foreach ($battle->getBattleUnits() as $battleUnit) {
-//                TODO: to getDoctrine and check if have this unit and if have the amount for this attack
-//                if ($battleUnit->getAmount() > 0){
-//                    $battleUnitName = $battleUnit->getUnit()->getName();
-//                    if (!in_array($battleUnitName, $myKingdomUnits)){
-//                        $this->addFlash(
-//                            'error',
-//                            'You do not have' . $battleUnit->getUnit()->getName()
-//                        );
-//                        var_dump($battleUnitName);exit;
-//                        return $this->redirectToRoute("attack_kingdom", ['id' => $id]);
-//                    }
-//                }
-                var_dump('here2');exit;
-
                 $battleUnit->setBattle($battle);
             }
 
-//            var_dump($battle);exit;
+//            Set into DB battle for each unit
             $em->persist($battle);
             $em->flush();
-            return $this->redirectToRoute("attack_kingdom", ['id' => $id]);
+            $removeBattle = false;
+
+//            Check if battle units are more than in myKingdom
+            foreach ($battle->getBattleUnits() as $battleUnit) {
+                $battleUnitAmount = $battleUnit->getAmount();
+                if ($battleUnitAmount > 0) {
+                    $kingdomUnit = $this->getDoctrine()->getRepository(KingdomUnit::class)->findOneBy([
+                        'unit' => $battleUnit->getUnit(),
+                        'kingdom' => $myKingdom
+                    ]);
+
+                    if ($kingdomUnit) {
+                        if ($kingdomUnit->getAmount() < $battleUnitAmount) {
+                            $this->addFlash(
+                                'error',
+                                'Not enough units from ' . $battleUnit->getUnit()->getName()
+                            );
+                            $removeBattle = true;
+                        }
+                    }
+                }
+            }
+//          TODO: if already have a battle then error and it is not finished - battle already happening
+
+//            If battle units are more than in myKingdom then remove battle units and battle from DB
+            if ($removeBattle) {
+                foreach ($battle->getBattleUnits() as $battleUnit) {
+                    $em->remove($battleUnit);
+                    $em->flush();
+                }
+
+                $em->remove($battle);
+                $em->flush();
+                return $this->redirectToRoute("attack_kingdom", ['id' => $id]);
+            }
+
+//            Set the new amount for each unit in myKingdom after all checks
+            foreach ($battle->getBattleUnits() as $battleUnit) {
+                $battleUnitAmount = $battleUnit->getAmount();
+                if ($battleUnitAmount > 0) {
+                    $kingdomUnit = $this->getDoctrine()->getRepository(KingdomUnit::class)->findOneBy([
+                        'unit' => $battleUnit->getUnit(),
+                        'kingdom' => $myKingdom
+                    ]);
+
+                    if ($kingdomUnit) {
+                        $kingdomUnitCurrentAmount = $kingdomUnit->getAmount();
+                        $kingdomUnit->setAmount($kingdomUnitCurrentAmount - $battleUnitAmount);
+                        $em->persist($kingdomUnit);
+                        $em->flush();
+                    }
+                }
+            }
+
+
+//            $em->persist($battle);
+//            $em->flush();
+            $this->addFlash(
+                'notice',
+                'Battle units sent to ' . $attackedKingdom->getName()
+            );
+            return $this->redirectToRoute("dashboard");
         }
 
-            return $this->render('battles/sendUnits.html.twig', [
+        return $this->render('battles/sendUnits.html.twig', [
             'attackedKingdom' => $attackedKingdom,
             'myKingdom' => $myKingdom,
             'units' => $units,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("battle/{id}", name="battle_report")
+     * @param $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function battleReport($id){
+        /** @var Battle $battle */
+        $battle = $this->getDoctrine()->getRepository(Battle::class)->findOneBy([
+            'id' => $id
+        ]);
+
+//        TODO: set unauthorised users to be redirected to dashboard
+
+        return $this->render('battles/report.html.twig', [
+            'battle' => $battle
         ]);
     }
 }

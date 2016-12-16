@@ -24,7 +24,7 @@ class BattleUnits
     /**
      * @var Battle
      *
-     * @ORM\ManyToOne(targetEntity="KingdomGameBundle\Entity\Battle", inversedBy="battleUnits", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="KingdomGameBundle\Entity\Battle", inversedBy="battleUnits")
      * @ORM\JoinColumn(name="battle_id")
      */
     private $battle;

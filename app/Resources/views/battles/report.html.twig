@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="thumbnail">
+                    <img src="..." alt="some cool picture of battle here">
+                    <div class="caption">
+                        <h4><b>ID:</b> {{ battle.id }}</h4>
+                        <h4>Returned units:</h4>
+                        <p>
+                            {% for battleUnit in battle.battleUnits %}
+                                <b>{{ battleUnit.unit.name }}:</b>  {{ battleUnit.amount }}<br/>
+                            {% endfor %}
+                        </p>
+                        <p>
+                            <b>Finished:</b>
+                            {% if battle.finished %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                        </p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        {#<p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

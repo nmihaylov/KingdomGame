@@ -52,6 +52,12 @@ class Unit
      */
     private $unitDependencies;
 
+    /** @var  UnitCoefficient
+     *
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\UnitCoefficient", mappedBy="unit")
+     */
+    private $unitCoefficient;
+
     /**
      * @var string
      *
@@ -183,5 +189,23 @@ class Unit
     {
         return (string)$this->id;
     }
+
+    /**
+     * @return UnitCoefficient
+     */
+    public function getUnitCoefficient()
+    {
+        return $this->unitCoefficient;
+    }
+
+    /**
+     * @param UnitCoefficient $unitCoefficient
+     */
+    public function setUnitCoefficient(UnitCoefficient $unitCoefficient)
+    {
+        $this->unitCoefficient = $unitCoefficient;
+    }
+
+
 }
 

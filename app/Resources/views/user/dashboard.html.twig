@@ -8,30 +8,15 @@
         <br>
         Full name: {{ player.fullName }}
     </div>
-    <div class="col-sm-12">
-        <h2>Kingdoms</h2>
-    </div>
+
     <div class="col-sm-6">
-        {#<div class="list-group">#}
-        {#{% for kingdom in player.kingdoms %}#}
-
-        {#{% if kingdom.id == kingdomId %}#}
-        {#<a class="list-group-item active">✓ {{ kingdom.name }} [{{ kingdom.x }} : {{ kingdom.y }}]</a>#}
-
-        {#{% else %}#}
-        {#<a class="list-group-item" href="{{ path("change_Kingdom", {id: kingdom.id }) }}">{{ kingdom.name }}#}
-        {#[{{ kingdom.x }} : {{ kingdom.y }}]</a>#}
-        {#{% endif %}#}
-        {#{% endfor %}#}
-
-        {#</div>#}
-
         <div class="btn-group-vertical">
             <div class="btn-group">
+
                 <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    {% for kingdom in player.kingdoms %}
+                    Kingdom: {% for kingdom in player.kingdoms %}
                         {% if kingdom.id == kingdomId %}
-                            ✓ {{ kingdom.name }}
+                            {{ kingdom.name }}
                             [{{ kingdom.x }} : {{ kingdom.y }}]
                         {% endif %}
                     {% endfor %}
@@ -54,12 +39,18 @@
                     {% endfor %}
                 </ul>
             </div>
-
+            <br/>
             <div class="btn-group-vertical">
                 <a class="btn btn-default" href="{{ path("buildings_list") }}">Show buildings</a>
+                <br/>
                 <a class="btn btn-default" href="{{ path("units") }}">Show units</a>
             </div>
         </div>
     </div>
 
+    <div class="col-sm-12">
+        {{ render(controller(
+        'KingdomGameBundle:KingdomCurrent:battles'
+        )) }}
+    </div>
 {% endblock %}

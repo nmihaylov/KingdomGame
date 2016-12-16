@@ -37,6 +37,13 @@ class Battle
     private $impactOn;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="units_return", type="datetime")
+     */
+    private $unitsReturn;
+
+    /**
      * @var Kingdom
      *
      * @ORM\ManyToOne(targetEntity="KingdomGameBundle\Entity\Kingdom", inversedBy="id")
@@ -51,6 +58,20 @@ class Battle
      * @ORM\JoinColumn(name="defender_kingdom_id")
      */
     private $defender;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="is_finished", type="integer")
+     */
+    private $isFinished;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="are_units_returned", type="integer")
+     */
+    private $areUnitsReturned;
 
     public function __construct()
     {
@@ -143,6 +164,54 @@ class Battle
     {
         $this->battleUnits[] = $battleUnits;
         $battleUnits->setBattle($this);
+    }
+
+    /**
+     * @return int
+     */
+    public function isFinished()
+    {
+        return $this->isFinished;
+    }
+
+    /**
+     * @param int $isFinished
+     */
+    public function setFinished(int $isFinished)
+    {
+        $this->isFinished = $isFinished;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUnitsReturn()
+    {
+        return $this->unitsReturn;
+    }
+
+    /**
+     * @param \DateTime $unitsReturn
+     */
+    public function setUnitsReturn(\DateTime $unitsReturn)
+    {
+        $this->unitsReturn = $unitsReturn;
+    }
+
+    /**
+     * @return int
+     */
+    public function areUnitsReturned()
+    {
+        return $this->areUnitsReturned;
+    }
+
+    /**
+     * @param int $areUnitsReturned
+     */
+    public function setUnitsReturned(int $areUnitsReturned)
+    {
+        $this->areUnitsReturned = $areUnitsReturned;
     }
 
 

@@ -8,9 +8,10 @@ Desktop.ini
 #PHPStorm junk
 
 .idea/
-
 .var/
 
+idea
+var
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/

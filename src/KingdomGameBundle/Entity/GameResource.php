@@ -49,6 +49,21 @@ class GameResource
      */
     private $unitCosts;
 
+    /**
+     * @var Building
+     *
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\Building", inversedBy="resource")
+     * @ORM\JoinColumn(name="building_id")
+     */
+    private $building;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="amount_per_hour", type="integer")
+     */
+    private $amountPerHour;
+
     public function __construct()
     {
         $this->kingdomResources = new ArrayCollection();
@@ -119,6 +134,54 @@ class GameResource
     public function setBuildingCosts(array $buildingCosts)
     {
         $this->buildingCosts = $buildingCosts;
+    }
+
+    /**
+     * @return UnitCostResource[]
+     */
+    public function getUnitCosts()
+    {
+        return $this->unitCosts;
+    }
+
+    /**
+     * @param UnitCostResource[] $unitCosts
+     */
+    public function setUnitCosts(array $unitCosts)
+    {
+        $this->unitCosts = $unitCosts;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAmountPerHour()
+    {
+        return $this->amountPerHour;
+    }
+
+    /**
+     * @param int $amountPerHour
+     */
+    public function setAmountPerHour(int $amountPerHour)
+    {
+        $this->amountPerHour = $amountPerHour;
+    }
+
+    /**
+     * @return Building
+     */
+    public function getBuilding()
+    {
+        return $this->building;
+    }
+
+    /**
+     * @param Building $building
+     */
+    public function setBuilding(Building $building)
+    {
+        $this->building = $building;
     }
 
 }

@@ -9,6 +9,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+/**
+ * Class HomeController
+ * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ * @package KingdomGameBundle\Controller
+ */
 class HomeController extends Controller
 {
     /**
@@ -17,10 +22,12 @@ class HomeController extends Controller
      */
     public function indexAction()
     {
-        $user = $this->getUser();
-        if ($user){
+//        $user = $this->getUser();
+//        if ($user){
+//
+//        }
+//        return $this->render('game/index.html.twig');
 
-        }
-        return $this->render('game/index.html.twig');
+        return $this->redirectToRoute("dashboard");
     }
 }

@@ -31,7 +31,7 @@ class BuildingsController extends KingdomCurrentController
     {
         $kingdom = $this->getDoctrine()->getRepository(Kingdom::class)->find($this->getKingdomId());
         /** @var Building $buildings */
-        $buildings = $this->getDoctrine()->getRepository(Building::class)->findAll();
+//        $buildings = $this->getDoctrine()->getRepository(Building::class)->findAll();
         $now = new \DateTime("now");
         /** @var BuildingProgress[] $buildingsInProgress */
         $buildingsInProgress = [];
@@ -80,6 +80,19 @@ class BuildingsController extends KingdomCurrentController
                 'kingdom' => $kingdom,
                 'building' => $building
             ]);
+
+        $alreadyInProgress = $this->getDoctrine()->getRepository(BuildingProgress::class)->findBy([
+            'building' => $kingdomBuilding
+        ]);
+
+        if ($alreadyInProgress){
+            $this->addFlash(
+                'error',
+                'This building is already in progress'
+            );
+            return $this->redirectToRoute("buildings_list");
+        }
+
         $currentLevel = $kingdomBuilding->getLevel();
         $costs = $building->getCosts();
         $allResources = [];
@@ -122,8 +135,6 @@ class BuildingsController extends KingdomCurrentController
             $kingdomBuilding->setKingdom($kingdom);
         }
 
-
-//        TODO finish when already in progress to throw exception
 
         $buildingInProgress = new BuildingProgress();
         $buildingTimeCostInt = $this->evolveTimeCost($kingdomBuilding->getBuilding()->getTimeCosts()->getAmount(), $currentLevel);

@@ -6,9 +6,8 @@
 
 {% block main %}
 <h2>{{ kingdom.player.username }}'s kingdom - {{ kingdom.name }}</h2>
-    {#TODO: remove this button for my kingdoms#}
     <a href="{{ path("attack_kingdom", {id: kingdom.id}) }}" class="btn btn-danger">Attack this kingdom</a>
-    {#TODO: to finish the belwo funcitonality#}
+    {#TODO: to finish the below funcitonality#}
     <a href="#" class="btn btn-info">View more about this kingdom - NOT WORKING</a>
     <h3>Buildings</h3>
     <table class="table table-striped table-hover ">

@@ -46,6 +46,12 @@ class KingdomResource
      */
     private $amount;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="last_added", type="datetime")
+     */
+    private $lastAdded;
 
     /**
      * Get id
@@ -111,6 +117,22 @@ class KingdomResource
     public function setResource(GameResource $resource)
     {
         $this->resource = $resource;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getLastAdded()
+    {
+        return $this->lastAdded;
+    }
+
+    /**
+     * @param \DateTime $lastAdded
+     */
+    public function setLastAdded(\DateTime $lastAdded)
+    {
+        $this->lastAdded = $lastAdded;
     }
 
 }

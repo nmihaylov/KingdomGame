@@ -53,6 +53,12 @@ class Building
      */
     private $name;
 
+    /** @var  GameResource
+     *
+     * @ORM\OneToOne(targetEntity="KingdomGameBundle\Entity\GameResource", mappedBy="building")
+     */
+    private $resource;
+
     public function __construct()
     {
         $this->costs = new ArrayCollection();
@@ -155,6 +161,22 @@ class Building
     public function setBuildingDependencies(array $buildingDependencies)
     {
         $this->buildingDependencies = $buildingDependencies;
+    }
+
+    /**
+     * @return GameResource
+     */
+    public function getResource()
+    {
+        return $this->resource;
+    }
+
+    /**
+     * @param GameResource $resource
+     */
+    public function setResource(GameResource $resource)
+    {
+        $this->resource = $resource;
     }
 
 

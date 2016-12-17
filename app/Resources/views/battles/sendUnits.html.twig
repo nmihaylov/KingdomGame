@@ -40,39 +40,17 @@
         </table>
     </div>
     <div class="col-sm-12">
-        {#<table class="table table-striped table-hover ">#}
-        {#<thead>#}
-        {#<tr>#}
-        {#<th>Name</th>#}
-        {#<th>Available amount</th>#}
-        {#<th>Amount to send</th>#}
-        {#</tr>#}
-        {#</thead>#}
-        {#<tbody>#}
-        {#{% for unit in attackedKingdom.units %}#}
-        {#<tr>#}
-        {#<td>{{ unit.unit.name }}</td>#}
-        {#<td>{{ unit.amount }}</td>#}
-        {#TODO: FINISH THIS#}
-        {#<td>#}
-
-        {#</td>#}
-        {#</tr>#}
-        {#{% endfor %}#}
-        {#</tbody>#}
-        {#</table>#}
-
         <div class="col-sm-3">
             <form method="post">
-            <h3>Send units</h3>
-            {% for i,unit in units %}
-                {{ unit.name }}
-                <input type="hidden" name="battle[battleUnits][{{ i }}][unit]" value="{{ unit.id }}"/>
-                <input type="number" name="battle[battleUnits][{{ i }}][amount]" value="0"/>
-                <br/>
-            {% endfor %}
-            {{  form_row(form._token) }}
-            <button type="submit" class="btn btn-danger">Fight!</button>
+                <h3>Send units</h3>
+                {% for i,unit in units %}
+                    {{ unit.name }}
+                    <input type="hidden" name="battle[battleUnits][{{ i }}][unit]" value="{{ unit.id }}"/>
+                    <input type="number" name="battle[battleUnits][{{ i }}][amount]" value="0"/>
+                    <br/>
+                {% endfor %}
+                {{ form_row(form._token) }}
+                <button type="submit" class="btn btn-danger">Fight!</button>
             </form>
         </div>
     </div>

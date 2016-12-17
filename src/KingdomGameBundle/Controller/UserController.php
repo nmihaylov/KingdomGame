@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @package KingdomGameBundle\Controller
  * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
  */
-//  TODO: rename UserController to  PlayerController
+//  TODO: rename UserController to PlayerController
 class UserController extends KingdomCurrentController
 {
     const MIN_X = 0;
@@ -45,6 +45,7 @@ class UserController extends KingdomCurrentController
         // 1) build the form
         $player = new Player();
         $form = $this->createForm(UserType::class, $player);
+        $now = new \DateTime("now");
 
         // 2) handle the submit (will only happen on POST)
         $form->handleRequest($request);
@@ -61,9 +62,11 @@ class UserController extends KingdomCurrentController
             $em->persist($player);
             $em->flush();
 
-//              TODO: move this to function - make kingdom ...
+//              TODO: make service - add kingdom ...
 //              TODO: what if run out of space on the map?
             $kingdomRepository = $this->getDoctrine()->getRepository(Kingdom::class);
+            $kingdomNames = ["Aerie Peak","Aldrassil","Allerian Stronghold","Amberpine Lodge","Anvilmar","Astranaar","Auberdine","Azure Watch","Blackfathom Camp","Blood Watch","Brewnall Village","Chillwind Camp","Darkshire","Dolanaar","Eastvale Logging Camp","Farwatcher's Glen","Feathermoon Stronghold","Fizzcrank Airstrip","Fordragon Hold","Forest Song","Fort Wildervar","Goldshire","G cont.","Greenwarden's Grove","Honor Hold","Kharanos","Lakeshire","Lor'danel","Menethil Harbor","Morgan's Vigil","Nethergarde Keep","New Tinkertown","Nijel's Point","Orebor Harborage","Paw'don Village","Pearlfin Village","Pyrewood Village","Refuge Pointe","Rut'theran Village","Sentinel Hill","Southshore","Stardust Spire","Starfall Village","Stars' Rest","Stonetalon Peak","S cont.","Stormfeather Outpost","Surwich","Sylvanaar","Talonbranch Glade","Telaar","Telredor","Temple of Telhamat","Thal'darah Overlook","Thalanaar","Thelsamar","Theramore Isle","Toshley's Station","Tushui Landing","Valgarde","Valiance Keep","Westfall Brigade Encampment","Westguard Keep","Wildhammer Stronghold","Windrunner's Overlook","Windshear Hold","Wintergarde Keep","Agmar's Hammer","Apothecary Camp","Bambala","Bilgewater Harbor","Bloodhoof Village","Bloodvenom Post","Bor'gorok Outpost","Brackenwall Village","Brill","Camp Mojache","Camp Narache","Camp Oneqwah","Camp Taurajo","Camp Winterhoof","Cliffwalker Post","Conquest Hold","Crossroads","Deathknell","The Den","Fairbreeze Village","Falcon Watch","Forsaken Rear Guard","Garadar","Ghost Walker Post","Grim Ulang","Grom'gol Base Camp","Hammerfall","Hellscream's Watch","Honeydew Village","Huojin Landing","Kargath","Mok'Nathal Village","New Agamand","Razor Hill","Revantusk Village","Sen'jin Village","Sepulcher","Shadowmoon Village","S cont.","Shadowprey Village","Silverwind Refuge","Splintertree Post","Stonard","Stonebreaker Hold","Sun Rock Retreat","Sunreaver's Command","Swamprat Post","Tarren Mill","Taunka'le Village","Thunderlord Stronghold","Tidus","Tranquillien","Valormok","Vengeance Landing","Venomspite","Warsong Hold","Zabra'jin","Zoram'gar Outpost"];
+
             for ($i = 0; $i < self::START_KINGDOMS; $i++) {
                 do {
                     $x = rand(self::MIN_X, self::MAX_X);
@@ -76,13 +79,14 @@ class UserController extends KingdomCurrentController
                 $kingdom = new Kingdom();
                 $kingdom->setX($x);
                 $kingdom->setY($y);
-//                TODO: get something of interesting name from array of names
-                $kingdom->setName($player->getUsername() . "_" . ($i + 1));
+//                $kingdom->setName($player->getUsername() . "_" . ($i + 1));
+                $kingdomNameIndex = array_rand($kingdomNames, 1);
+                $kingdom->setName($kingdomNames[$kingdomNameIndex]);
                 $kingdom->setPlayer($player);
                 $em->persist($kingdom);
                 $em->flush();
 
-//                TODO: make function - add initial resources
+//                TODO: make service - add initial resources
 
                 $resourceRepository = $this->getDoctrine()->getRepository(GameResource::class);
                 $resourceTypes = $resourceRepository->findAll();
@@ -92,11 +96,12 @@ class UserController extends KingdomCurrentController
                     $kingdomResource->setResource($resourceType);
                     $kingdomResource->setAmount(self::INITIAL_RESOURCES);
                     $kingdomResource->setKingdom($kingdom);
+                    $kingdomResource->setLastAdded($now);
                     $em->persist($kingdomResource);
                     $em->flush();
                 }
 
-//                TODO: make function
+//                TODO: make service - add initial buildings
                 $buildingRepository = $this->getDoctrine()->getRepository(Building::class);
                 $buildingTypes = $buildingRepository->findAll();
                 foreach ($buildingTypes as $buildingType){

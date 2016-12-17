@@ -11,9 +11,15 @@ use KingdomGameBundle\Entity\UnitBuildingDependency;
 use KingdomGameBundle\Entity\UnitProgress;
 use KingdomGameBundle\Form\KingdomUnitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class UnitsController
+ * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ * @package KingdomGameBundle\Controller
+ */
 class UnitsController extends KingdomCurrentController
 {
     /**
@@ -78,17 +84,32 @@ class UnitsController extends KingdomCurrentController
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             $unit = $kingdomUnit->getUnit();
+
             $exist = $this->getDoctrine()->getRepository(KingdomUnit::class)
-                ->findOneBy(['kingdom' => $kingdomUnit->getKingdom(), 'unit' => $kingdomUnit->getUnit()]);
+                ->findOneBy([
+                    'kingdom' => $kingdomUnit->getKingdom(),
+                    'unit' => $kingdomUnit->getUnit()
+                ]);
             $addedUnits = $kingdomUnit->getAmount();
             if ($exist) {
                 $kingdomUnit = $exist;
             } else {
                 $kingdomUnit->setAmount(0);
             }
-            $err = null;
-            foreach ($unit->getUnitDependencies() as $unitDependency) {
 
+            $unitInProgress = $this->getDoctrine()->getRepository(UnitProgress::class)->findOneBy([
+                'unit' => $kingdomUnit
+            ]);
+
+            if ($unitInProgress) {
+                $this->addFlash(
+                    'error',
+                    'Units already in progress'
+                );
+                return $this->redirectToRoute("units");
+            }
+
+            foreach ($unit->getUnitDependencies() as $unitDependency) {
                 $kingdomBuilding = $this->getDoctrine()->getRepository(KingdomBuilding::class)->findOneBy([
                     'building' => $unitDependency->getBuilding()->getId(),
                     'kingdom' => $kingdom->getId()
@@ -139,16 +160,6 @@ class UnitsController extends KingdomCurrentController
                 $em->persist($kingdomResource);
                 $em->flush();
             }
-
-            if ($kingdomUnit === null) {
-                $kingdomUnit = new KingdomUnit();
-                $kingdomUnit->setAmount(0);
-                $kingdomUnit->setUnit($unit);
-                $kingdomUnit->setKingdom($kingdom);
-            }
-
-
-//        TODO finish when already in progress to throw exception
 
             $now = new \DateTime("now");
             $unitTimeCostInt = $unit->getTimeCost()->getAmount() * $addedUnits;

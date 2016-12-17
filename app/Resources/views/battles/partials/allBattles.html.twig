@@ -1,0 +1,38 @@
+<div class="col-sm-12">
+    <h3>Where am I attacked?</h3>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Attacker</th>
+            <th>Defender</th>
+            <th>Impact after</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for battle in allDefendingBattles %}
+        <tr>
+            <td>{{ battle.id }}</td>
+            <td>
+                <a href="{{ path("view_kingdom", {id: battle.attacker.id}) }}">{{ battle.attacker.player.username }} : {{ battle.attacker.name }}</a>
+            </td>
+            <td>
+                <a href="{{ path("view_kingdom", {id: battle.defender.id}) }}">{{ battle.defender.player.username }} : {{ battle.defender.name }}</a>
+            </td>
+            <td>
+                {% if battle.finished %}
+                    Finished
+                {% else %}
+                    {% set difference = date(battle.impactOn|date("Y-m-d H:i:s")).diff(date(now|date("Y-m-d H:i:s"))) %}
+                    {{ difference|date("%d \days %h \hours %i \minutes %s \seconds") }}
+                {% endif %}
+            </td>
+
+            <td><a href="{{ path("battle_report", {id: battle.id}) }}" class="btn btn-default btn-xs">View
+                    more</a></td>
+        </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>

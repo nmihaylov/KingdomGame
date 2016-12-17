@@ -11,10 +11,16 @@ use KingdomGameBundle\Entity\Player;
 use KingdomGameBundle\Entity\Unit;
 use KingdomGameBundle\Form\BattleType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\Constraints\Date;
 
+/**
+ * Class BattleController
+ * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+ * @package KingdomGameBundle\Controller
+ */
 class BattleController extends KingdomCurrentController
 {
     /**
@@ -23,19 +29,15 @@ class BattleController extends KingdomCurrentController
      */
     public function indexAction()
     {
+
+        /** @var Kingdom[] $myKingdoms */
         $myKingdoms = $this->getDoctrine()->getRepository(Kingdom::class)->findBy([
             'player' => $this->getUser()
         ]);
 
+        /** @var Kingdom[] $kingdoms */
         $kingdoms = $this->getDoctrine()->getRepository(Kingdom::class)->findAll();
 
-        $arrAllKingdomsCoordinates = [];
-        foreach ($kingdoms as $kingdom) {
-            $arrAllKingdomsCoordinates[$kingdom->getX()][$kingdom->getY()] = $kingdom->getId();
-//            var_dump($kingdom->getX());
-//            var_dump($kingdom->getY());
-        }
-//        var_dump($arrAllKingdomsCoordinates);exit;
         return $this->render('battles/allKingdoms.html.twig', [
             'kingdoms' => $kingdoms,
             'myKingdoms' => $myKingdoms
@@ -73,14 +75,38 @@ class BattleController extends KingdomCurrentController
         $form = $this->createForm(BattleType::class, $battle);
         $form->handleRequest($request);
 
+        if ($myKingdom->getId() == $id) {
+            $this->addFlash(
+                'error',
+                'You are now allowed to attack yourself'
+            );
+            return $this->redirectToRoute("dashboard");
+        }
+
         if ($form->isSubmitted()) {
-//            TODO: calculate time
-            $roadTimeCostInt = 60;
+            $myKingdomX = $myKingdom->getX();
+            $myKingdomY = $myKingdom->getY();
+            $attackedKingdomX = $attackedKingdom->getX();
+            $attackedKingdomY = $attackedKingdom->getY();
+
+            $myKingdomXY = $myKingdomX + $myKingdomY;
+            $attackedKingdomXY = $attackedKingdomX + $attackedKingdomY;
+
+            if ($myKingdomXY > $attackedKingdomXY) {
+                $roadTimeCostInt = $myKingdomXY - $attackedKingdomXY;
+            } else {
+                $roadTimeCostInt = $attackedKingdomXY - $myKingdomXY;
+            }
+
+//            $roadTimeCostInt += $roadTimeCostInt * 60;
+
             $roadTimeCost = new \DateInterval('PT' . $roadTimeCostInt . 'S');
             $now = new \DateTime("now");
             $impactOn = $now->add($roadTimeCost);
 
-            $roadBackTimeCost =  new \DateInterval('PT' . $roadTimeCostInt * 2 . 'S');
+            $roadBackTimeCostInt = $roadTimeCostInt * 2;
+            $roadBackTimeCost = new \DateInterval('PT' . $roadBackTimeCostInt . 'S');
+            $now = new \DateTime("now");
             $unitsReturnOn = $now->add($roadBackTimeCost);
 
             $battle->setAttacker($myKingdom);
@@ -93,8 +119,8 @@ class BattleController extends KingdomCurrentController
             $em = $this->getDoctrine()->getManager();
 
 //            Adding tha battle
-            $em->persist($battle);
-            $em->flush();
+//            $em->persist($battle);
+//            $em->flush();
 
 //            Set battle for each battleUnit
             foreach ($battle->getBattleUnits() as $battleUnit) {
@@ -181,7 +207,8 @@ class BattleController extends KingdomCurrentController
      * @param $id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function battleReport($id){
+    public function battleReport($id)
+    {
         /** @var Battle $battle */
         $battle = $this->getDoctrine()->getRepository(Battle::class)->findOneBy([
             'id' => $id

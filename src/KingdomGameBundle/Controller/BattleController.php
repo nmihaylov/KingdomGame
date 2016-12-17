@@ -75,7 +75,7 @@ class BattleController extends KingdomCurrentController
         $form = $this->createForm(BattleType::class, $battle);
         $form->handleRequest($request);
 
-        if ($myKingdom->getId() == $id) {
+        if ($attackedKingdom->getPlayer() == $myKingdom->getPlayer()) {
             $this->addFlash(
                 'error',
                 'You are now allowed to attack yourself'
